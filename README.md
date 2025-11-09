@@ -70,16 +70,13 @@ hugo server -D
 
 ## Bootstrap System
 
-All scripts use `bootstrap.sh` which automatically installs:
-- mise (tool version manager)
-- Go (via mise and `.tool-versions`)
-- Hugo (via mise and `.tool-versions`)
+All Go scripts are executable and automatically install their dependencies (mise, Go, Hugo) when run.
 
-Go scripts use the shebang `//$(cd "$(dirname "$0")"; pwd)/bootstrap.sh go run "$0" "$@"; exit` which:
-1. Uses `//` prefix (Go comment) that shell collapses to `/`
-2. Constructs absolute path to bootstrap.sh dynamically
-3. bootstrap.sh installs mise/Go/Hugo, then executes `go run "$0" "$@"`
-4. The `;exit` prevents shell from executing Go code as commands
+To create a new executable Go script, add this line at the top:
+```go
+//$(cd "$(dirname "$0")"; pwd)/bootstrap.sh "$0" "$@"; exit
+package main
+```
 
 ## Dependencies
 

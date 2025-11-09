@@ -1,4 +1,4 @@
-//$(cd "$(dirname "$0")"; pwd)/bootstrap.sh go run "$0" "$@"; exit
+//$(cd "$(dirname "$0")"; pwd)/bootstrap.sh "$0" "$@"; exit
 package main
 
 import (

@@ -20,7 +20,7 @@ fi
 mise install
 eval "$(mise env)"
 
-# If this script is being executed (not sourced) and has an argument, execute the command
+# If this script is being executed (not sourced) and has an argument, run it with go
 if [[ "${BASH_SOURCE[0]}" == "${0}" && -n "${1}" ]]; then
-    exec "$@"
+    exec go run "${1%.go}.go" "${@:2}"
 fi
