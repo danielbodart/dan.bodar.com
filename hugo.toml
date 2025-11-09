@@ -1,0 +1,50 @@
+baseURL = 'https://dan.bodar.com/'
+languageCode = 'en-gb'
+defaultContentLanguage = "en"
+title = 'Yesterday I was wrong'
+enableEmoji = true
+
+[permalinks]
+  posts = '/:year/:month/:day/:slug/'
+  pages = '/:slug/'
+
+[module]
+  [[module.imports]]
+    path = "github.com/hugo-sid/hugo-blog-awesome"
+
+[markup.highlight]
+noClasses = false
+
+[markup.goldmark.renderer]
+unsafe = true
+
+[params]
+  goToTop = true
+  mainSections = ['posts']
+
+[languages.en]
+languageCode = "en-gb"
+weight = 1
+title = "Yesterday I was wrong"
+
+[languages.en.params]
+description = "Daniel Worthington-Bodart's technical blog"
+mainSections = ['posts']
+
+[languages.en.params.author]
+name = "Dan Bodart"
+
+[[languages.en.menu.main]]
+name = "Home"
+url = "/"
+weight = 1
+
+[[languages.en.menu.main]]
+name = "Posts"
+url = "/posts/"
+weight = 2
+
+[[languages.en.menu.main]]
+name = "About"
+url = "/about/"
+weight = 3
