@@ -53,19 +53,8 @@ Standard Hugo configuration with:
 The `run` script (converted to Go) provides common tasks:
 
 ```bash
-./run.go dev      # Start Hugo dev server
-./run.go build    # Build site
-./run.go version  # Show version info
-./run.go clean    # Clean artifacts
-./run.go ci       # CI build
-./run.go tag      # Create git tag
-```
-
-Or use Hugo directly (bootstrap.sh ensures dependencies are installed):
-
-```bash
-./bootstrap.sh
-hugo server -D
+./run dev      # Start Hugo dev server
+./run build    # Build site
 ```
 
 ## Bootstrap System
