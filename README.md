@@ -24,6 +24,8 @@ This repository includes Go scripts used for the WordPress to Hugo migration:
 
 ### Running Migration Scripts
 
+All Go scripts use `bootstrap.sh` for automatic dependency installation (mise, Hugo, Go).
+
 ```bash
 # Set environment variables
 export WP_DB_HOST=localhost
@@ -32,7 +34,7 @@ export WP_DB_USER=your_user
 export WP_DB_PASSWORD=your_password
 export WP_DB_NAME=your_database
 
-# Execute scripts directly (they use shebang)
+# Execute scripts directly - bootstrap.sh handles setup automatically
 ./wp_to_hugo.go
 ./query_wp.go
 ./verify_urls.go
@@ -48,19 +50,40 @@ Standard Hugo configuration with:
 
 ### Development
 
+The `run` script (converted to Go) provides common tasks:
+
 ```bash
-# Install dependencies
-go mod download
-
-# Run Hugo dev server
-hugo server -D
-
-# Build site
-hugo
+./run.go dev      # Start Hugo dev server
+./run.go build    # Build site
+./run.go version  # Show version info
+./run.go clean    # Clean artifacts
+./run.go ci       # CI build
+./run.go tag      # Create git tag
 ```
+
+Or use Hugo directly (bootstrap.sh ensures dependencies are installed):
+
+```bash
+./bootstrap.sh
+hugo server -D
+```
+
+## Bootstrap System
+
+All scripts use `bootstrap.sh` which automatically installs:
+- mise (tool version manager)
+- Go (via mise and `.tool-versions`)
+- Hugo (via mise and `.tool-versions`)
+
+Go scripts use the shebang `//$(cd "$(dirname "$0")"; pwd)/bootstrap.sh go run "$0" "$@"; exit` which:
+1. Uses `//` prefix (Go comment) that shell collapses to `/`
+2. Constructs absolute path to bootstrap.sh dynamically
+3. bootstrap.sh installs mise/Go/Hugo, then executes `go run "$0" "$@"`
+4. The `;exit` prevents shell from executing Go code as commands
 
 ## Dependencies
 
-- Go 1.x (for migration scripts)
-- Hugo (for static site generation)
-- MySQL client library: `github.com/go-sql-driver/mysql`
+Managed automatically via mise:
+- Go (specified in `.tool-versions`)
+- Hugo (specified in `.tool-versions`)
+- MySQL client library: `github.com/go-sql-driver/mysql` (via `go.mod`)

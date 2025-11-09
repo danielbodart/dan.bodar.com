@@ -20,8 +20,7 @@ fi
 mise install
 eval "$(mise env)"
 
-# If this script is being executed (not sourced) and has an argument, run it with bun
+# If this script is being executed (not sourced) and has an argument, execute the command
 if [[ "${BASH_SOURCE[0]}" == "${0}" && -n "${1}" ]]; then
-    bash "$@"
-    exit $?
+    exec "$@"
 fi
