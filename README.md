@@ -67,6 +67,29 @@ To create a new executable Go script, add this line at the top:
 package main
 ```
 
+## Deployment
+
+The site deploys automatically to GitHub Pages via GitHub Actions when pushing to `master`.
+
+### GitHub Pages Setup
+
+1. Go to repository Settings → Pages
+2. Source: "GitHub Actions"
+3. The workflow builds the site using `./run build` and deploys to Pages
+
+### DNS Configuration
+
+Add these DNS records for `dan.bodar.com`:
+- `A` record pointing to GitHub Pages IPs:
+  - `185.199.108.153`
+  - `185.199.109.153`
+  - `185.199.110.153`
+  - `185.199.111.153`
+- `CNAME` record for `www` pointing to `danielbodart.github.io`
+
+Or use a single `CNAME` record for the apex domain if your DNS provider supports it:
+- `CNAME` record for `@` pointing to `danielbodart.github.io`
+
 ## Dependencies
 
 Managed automatically via mise:
