@@ -16,7 +16,7 @@ After reading [Atlassian](https://www.atlassian.com/git/tutorials/comparing-work
 
 - I incorrectly assumed GitFlow was the same thing as [GitHub flow](https://guides.github.com/introduction/flow/index.html) (fork project, do work then pull request)
 - This model appears to be popular but it seems totally archaic to me
-  
+
   - Requires lots of merging especially if you refactor at lot.
   - Doesn't do CD
   - Requires lots of manual work
@@ -33,13 +33,13 @@ After reading [Atlassian](https://www.atlassian.com/git/tutorials/comparing-work
 
 - Master is always trunk or head where all new development happens
 - Every single check-in triggers a build (and tag with auto increment minor version) and is expected to be production code
-  
+
   - If possible every build is automatically released but if not then a single click by an authorised user would make that release public
 - If old major versions are supported by team they are on branches (but the rest is the same, i.e every check is a release etc)
 - Hot fixes are just another commit to either master or the branch. i.e nothing special
 - Done means in production and you have monitored it with your own eyes! You don't start new work until you have seen your old work live
 - If you are on the core team:
-  
+
   - If you pair you can commit to master or branch directly
   - If you solo you should get code review or pull request
 - If you are not on core team you pull request from your fork

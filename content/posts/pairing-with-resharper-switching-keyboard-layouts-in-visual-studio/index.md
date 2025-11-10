@@ -21,19 +21,13 @@ Please see [attached zip](keyboardlayout.zip)
 
 [MSDN Reference for binding keys in Visual Studio](http://msdn.microsoft.com/en-us/library/envdte.command.bindings.aspx)
 
- 
-
 **What does it do?**
 
 Allow you to switch between "Resharper + Visual Studio" and IntelliJ shortcuts
 
- 
-
 **Why would you do that?**
 
 You are pairing with someone who knows the other set of shortcuts
-
- 
 
 **How to install?**
 
@@ -42,8 +36,6 @@ You are pairing with someone who knows the other set of shortcuts
 - Open Visual Studio
 - Tools - Macros - Load Macros Project... Select the ThoughtWorks folder Select the ThoughtWorks Project
 - Tools -  Options - Environment - Keyboard: Select the Resharper or IntelliJ
-
- 
 
 **How to switch?**
 
@@ -56,8 +48,6 @@ You are pairing with someone who knows the other set of shortcuts
 - Tools - Import and Export Settings... - Import selected environment settings - No, just import new settings - Browse - Select Switch.Shortcuts
 - Tools - Options - Environment - Keyboard: Select the Resharper
 - Tools - Import and Export Settings... - Import selected environment settings - No, just import new settings - Browse - Select Switch.Shortcuts
-
- 
 
 **Can't you create a decent installer?**
 

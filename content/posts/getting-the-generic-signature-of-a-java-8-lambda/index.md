@@ -42,8 +42,6 @@ ConstantPool constantPool = (ConstantPool) getConstantPool.invoke(lambda.getClas
 
 String[] methodRefInfo = constantPool.getMemberRefInfoAt(constantPool.size() - 2);
 
-
-
 int argumentIndex = 0;
 
 String argumentType = jdk.internal.org.objectweb.asm.Type.getArgumentTypes(methodRef[2])[argumentIndex].getClassName();

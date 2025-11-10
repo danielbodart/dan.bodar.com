@@ -40,8 +40,6 @@ WEB
 
 http://server/money.html?query=blah+blah+blah&sortBy=market_value
 
-
-
 ```
 
 **DQY Example**
@@ -56,8 +54,6 @@ DRIVER=SQL Server;SERVER=server\blah;UID=regulatory;PWD=l33t;DATABASE=showMeTheM
 
 SELECT * FROM trades ORDER BY market_value DESC 
 
-
-
 ```
 
 **Disable Excel Pop.reg**
@@ -65,8 +61,6 @@ SELECT * FROM trades ORDER BY market_value DESC
 ```
 
 Windows Registry Editor Version 5.00
-
-
 
 [HKEY_CURRENT_USER\Software\Microsoft\Office\11.0\Excel\Options]
 

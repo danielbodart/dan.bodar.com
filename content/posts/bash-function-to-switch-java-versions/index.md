@@ -19,8 +19,6 @@ setjava() {
 
         fi
 
-
-
 	local jdk=~/Applications/Java/jdk1.$1
 
         if [ ! -d "${jdk}" ]; then
@@ -42,8 +40,6 @@ setjava() {
         fi
 
 }
-
-
 
 export -f setjava
 

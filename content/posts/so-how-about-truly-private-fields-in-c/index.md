@@ -14,7 +14,6 @@ After the crazy !@$%  with JavaScript yesterday I said to Christian, I bet we c
 
 ```csharp
 
-
 class Purse
 {
     public Func<int> get;
@@ -32,7 +31,6 @@ class Purse
 And here is the test ...
 
 ```csharp
-
 
 var p = new Purse(2);
 p.set(p.get() + 1);

@@ -105,6 +105,10 @@ func processContent(content string, postSlug string, postType string) string {
 	wpCommentRe := regexp.MustCompile(`<!-- /?wp:[^>]+ -->`)
 	content = wpCommentRe.ReplaceAllString(content, "")
 
+	// Remove empty divs and paragraphs that contain only whitespace or &nbsp;
+	content = regexp.MustCompile(`<div[^>]*>\s*(&nbsp;)?\s*</div>`).ReplaceAllString(content, "")
+	content = regexp.MustCompile(`<p[^>]*>\s*(&nbsp;)?\s*</p>`).ReplaceAllString(content, "")
+
 	// WordPress sometimes already has <br> or <br /> tags - normalize them to newlines first
 	content = regexp.MustCompile(`<br\s*/?>`).ReplaceAllString(content, "\n")
 
@@ -143,6 +147,12 @@ func processContent(content string, postSlug string, postType string) string {
 	// Pattern: [https://example.com](_wp_link_placeholder) -> https://example.com
 	linkFixRe := regexp.MustCompile(`\[(https?://[^\]]+)\]\([^)]*\)`)
 	markdown = linkFixRe.ReplaceAllString(markdown, "$1")
+
+	// Remove lines that only contain whitespace or non-breaking spaces (U+00A0)
+	markdown = regexp.MustCompile(`(?m)^[\s\x{00A0}]+$`).ReplaceAllString(markdown, "")
+
+	// Remove excessive blank lines (more than 2 consecutive newlines)
+	markdown = regexp.MustCompile(`\n{3,}`).ReplaceAllString(markdown, "\n\n")
 
 	// Process image/attachment URLs and copy files
 	if wpSiteURL != "" && wpBackupDir != "" {

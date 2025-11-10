@@ -18,21 +18,15 @@ hgext.purge =
 
 color = 
 
-
-
 [ui]
 
 username = Daniel Worthington-Bodart <***@*****.com>
-
-
 
 [merge-tools]
 
 meld.executable = meld
 
 meld.args = $local $base $other -o $output
-
-
 
 [auth]
 
@@ -43,8 +37,6 @@ google.username = **********
 google.password = **********
 
 google.schemes = http https
-
-
 
 [alias]
 

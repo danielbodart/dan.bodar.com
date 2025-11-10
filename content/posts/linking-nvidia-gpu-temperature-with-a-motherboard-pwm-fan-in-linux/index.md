@@ -18,8 +18,6 @@ I knew `nvidia-settings` could be used to query the temperature (and the pump sp
 
 set -e
 
-
-
 # This is the path to the PWM controlled fan (use lm_sensors/fancontrol to help you identify this)
 
 fan=/sys/class/hwmon/hwmon1/pwm1
@@ -34,27 +32,19 @@ manual=1
 
 max=80
 
-
-
 # Re-enable automatic fan control on exit
 
 trap "echo ${automatic} > ${fan}_enable; exit" SIGHUP SIGINT SIGTERM ERR EXIT
 
-
-
 # Enable manual fan control
 
 echo ${manual} > ${fan}_enable
-
-
 
 function temperature() {
 
         nvidia-settings -q [gpu:0]/gpucoretemp -t
 
 }
-
-
 
 function fan_speed() {
 
@@ -64,15 +54,11 @@ function fan_speed() {
 
 }
 
-
-
 while true; do
 
         temp=`temperature`
 
         echo GPU Temperature: $temp
-
-
 
         if [ "$temp" -ge "$max" ] ; then
 
@@ -83,8 +69,6 @@ while true; do
                 fan_speed $(($temp + ((100 - $max))))
 
         fi
-
-
 
         sleep 1
 
