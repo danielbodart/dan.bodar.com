@@ -112,9 +112,30 @@ func processContent(content string, postSlug string, postType string) string {
 	// WordPress sometimes already has <br> or <br /> tags - normalize them to newlines first
 	content = regexp.MustCompile(`<br\s*/?>`).ReplaceAllString(content, "\n")
 
+	// Protect existing <pre> and <code> blocks from newline conversion
+	// by temporarily replacing newlines inside them with a placeholder
+	preRe := regexp.MustCompile(`(?s)<pre[^>]*>.*?</pre>`)
+	codeRe := regexp.MustCompile(`(?s)<code[^>]*>.*?</code>`)
+	protectedBlocks := make(map[string]string)
+	placeholder := "___NEWLINE_PLACEHOLDER___"
+
+	for _, re := range []*regexp.Regexp{preRe, codeRe} {
+		content = re.ReplaceAllStringFunc(content, func(match string) string {
+			protected := strings.ReplaceAll(match, "\n", placeholder)
+			key := fmt.Sprintf("___PROTECTED_BLOCK_%d___", len(protectedBlocks))
+			protectedBlocks[key] = protected
+			return key
+		})
+	}
+
 	// Convert line breaks to <br> so the HTML-to-Markdown converter preserves them
-	// But we need to do this BEFORE we create code blocks, so they don't get affected
 	content = strings.ReplaceAll(content, "\n", "<br>")
+
+	// Restore protected blocks and their newlines
+	for key, protected := range protectedBlocks {
+		restored := strings.ReplaceAll(protected, placeholder, "\n")
+		content = strings.ReplaceAll(content, key, restored)
+	}
 
 	// Convert WordPress code shortcodes to HTML pre/code blocks
 	// Match [language]...[/language] patterns for common languages

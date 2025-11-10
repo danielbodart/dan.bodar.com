@@ -9,6 +9,5 @@ categories:
 
 ```
 dconf reset -f /org/gnome/gnome-panel/
-
 killall gnome-panel
 ```

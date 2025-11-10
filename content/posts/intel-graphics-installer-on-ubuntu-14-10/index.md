@@ -29,7 +29,6 @@ And put the following in there
 
 ```
 DISTRIB_RELEASE=14.04
-
 DISTRIB_CODENAME=trusty
 ```
 
@@ -37,7 +36,6 @@ This will allow the installer to proceed but you will also want to add the publi
 
 ```
 wget --no-check-certificate https://download.01.org/gfx/RPM-GPG-KEY-ilg -O - | sudo apt-key add -
-
 wget --no-check-certificate https://download.01.org/gfx/RPM-GPG-KEY-ilg-2 -O - | sudo apt-key add - 
 ```
 

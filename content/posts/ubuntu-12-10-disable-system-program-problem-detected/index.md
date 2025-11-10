@@ -7,7 +7,5 @@ categories:
 ---
 
 ```
-
 echo 'enabled=0' | sudo tee /etc/default/apport
-
 ```

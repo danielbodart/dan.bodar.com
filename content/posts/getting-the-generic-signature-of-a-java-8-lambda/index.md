@@ -35,17 +35,12 @@ Using reflection we can call Class.getConstantPool and then access the MethodRe
 
 ```
 Method getConstantPool = Class.class.getDeclaredMethod("getConstantPool");
-
 getConstantPool.setAccessible(true);
-
 ConstantPool constantPool = (ConstantPool) getConstantPool.invoke(lambda.getClass());
-
 String[] methodRefInfo = constantPool.getMemberRefInfoAt(constantPool.size() - 2);
 
 int argumentIndex = 0;
-
 String argumentType = jdk.internal.org.objectweb.asm.Type.getArgumentTypes(methodRef[2])[argumentIndex].getClassName();
-
 Class<?> type = (Class<?>) Class.forName(argumentType);
 ```
 

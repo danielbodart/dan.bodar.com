@@ -33,11 +33,8 @@ An alternative approach to just doing CSV export (which is fast and more cross p
 **IQY Example**
 
 ```
-
 WEB
-
 1
-
 http://server/money.html?query=blah+blah+blah&sortBy=market_value
 
 ```
@@ -45,13 +42,9 @@ http://server/money.html?query=blah+blah+blah&sortBy=market_value
 **DQY Example**
 
 ```
-
 XLODBC
-
 1
-
 DRIVER=SQL Server;SERVER=server\blah;UID=regulatory;PWD=l33t;DATABASE=showMeTheMoney
-
 SELECT * FROM trades ORDER BY market_value DESC 
 
 ```
@@ -59,11 +52,8 @@ SELECT * FROM trades ORDER BY market_value DESC
 **Disable Excel Pop.reg**
 
 ```
-
 Windows Registry Editor Version 5.00
 
 [HKEY_CURRENT_USER\Software\Microsoft\Office\11.0\Excel\Options]
-
 "QuerySecurity"=dword:00000002
-
 ```

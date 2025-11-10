@@ -20,15 +20,10 @@ xinput list
 If you see something like this:
 
 ```
-
 Virtual core pointer                    	id=2	[master pointer  (3)]
-
 ↳ Virtual core XTEST pointer              	id=4	[slave  pointer  (2)]
-
 ↳ SynPS/2 Synaptics TouchPad              	id=11	[slave  pointer  (2)]
-
 ↳ PS/2 Generic Mouse                      	id=12	[slave  pointer  (2)]
-
 ```
 
 As you can see the TrackPoint is not listed and as such you wont see it in any of the configuration screens.

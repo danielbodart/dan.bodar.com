@@ -16,7 +16,6 @@ Then you could run:
 
 ```
 export NAME=Dan
-
 envsubst < template.txt
 ```
 

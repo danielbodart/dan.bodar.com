@@ -15,61 +15,45 @@ comments:
 Here is my updated `/etc/rc.local`for Ubuntu 14.10
 
 ```
-
 #!/bin/sh -e
 
 # Sleep so all services have started before we change settings
-
 sleep 5
 
 # Set Intel Audio to power save 
-
 echo '1' > '/sys/module/snd_hda_intel/parameters/power_save';
 
 # Temp disable ethernet port
-
 modprobe -r r8169
 
 # Wireless Power Saving for interface wlan0
-
 iw dev wlan0 set power_save on
 
 # VM writeback timeout
-
 echo '1500' > '/proc/sys/vm/dirty_writeback_centisecs';
 
 # Temp disable bluetooth
-
 modprobe -r btusb
 
 # Adjust backlight to start much lower
-
 echo 800 > '/sys/class/backlight/intel_backlight/brightness'
 
 # - NMI Watchdog (turned off)
-
 echo 0 > '/proc/sys/kernel/nmi_watchdog';
 
 # - SATA Active Link Power management
-
 for i in `find /sys/class/scsi_host/*/link_power_management_policy`; do echo 'min_power' > $i; done;
 
 # - USB Autosuspend (after 2 secs of inactivity)
-
 for i in `find /sys/bus/usb/devices/*/power/control`; do echo auto > $i; done;
-
 for i in `find /sys/bus/usb/devices/*/power/autosuspend`; do echo 2 > $i; done;
 
 # - Device Power Management
-
 echo 'auto' | tee /sys/bus/i2c/devices/*/power/control > /dev/null;
-
 echo 'auto' | tee /sys/bus/pci/devices/*/power/control > /dev/null;
 
 # - CPU Scaling (power saving scaling governor for all CPU's
-
 for i in `find /sys/devices/system/cpu/*/cpufreq/scaling_governor`; do echo 'powersave' > $i; done;
 
 exit 0
-
 ```

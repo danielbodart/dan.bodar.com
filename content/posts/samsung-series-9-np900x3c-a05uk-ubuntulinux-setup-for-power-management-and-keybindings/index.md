@@ -19,51 +19,38 @@ Ubuntu 12.10 works pretty well out of the box (for me it was just power manageme
 **/etc/rc.local**
 
 ```
-
 #!/bin/sh -e
 
 # Temp disable ethernet port
-
 modprobe -r r8169
 
 # Disable wake up on lan if I do use ethernet port
-
 ethtool -s eth2 wol d;
 
 # Temp disable bluetooth
-
 modprobe -r btusb
 
 # Adjust backlight to start much lower
-
 echo 11 > /sys/class/backlight/acpi_video0/brightness
 
 # - NMI Watchdog (turned off)
-
 echo 0 > '/proc/sys/kernel/nmi_watchdog';
 
 # - SATA Active Link Powermanagement
-
 echo 'min_power' > '/sys/class/scsi_host/host0/link_power_management_policy';
 
 # - USB Autosuspend (after 2 secs of inactivity)
-
 for i in `find /sys/bus/usb/devices/*/power/control`; do echo auto > $i; done;
-
 for i in `find /sys/bus/usb/devices/*/power/autosuspend`; do echo 2 > $i; done;
 
 # - Device Power Management
-
 echo auto | tee /sys/bus/i2c/devices/*/power/control > /dev/null;
-
 echo auto | tee /sys/bus/pci/devices/*/power/control > /dev/null;
 
 # - CPU Scaling (on demand scaling governor for all CPU's
-
 for i in `find /sys/devices/system/cpu/*/cpufreq/scaling_governor`; do echo ondemand > $i; done;
 
 exit 0
-
 ```
 
 On the keybingings the only keys that didn't work were some of the Fn Keys
@@ -71,63 +58,36 @@ On the keybingings the only keys that didn't work were some of the Fn Keys
 **/lib/udev/keymaps/samsung-other**
 
 ```
-
 0xCE prog1              # FN+F1 System Settings (NOT WORKING)
-
 0x89 brightnessdown     # Fn+F2
-
 0x88 brightnessup       # Fn+F3
-
 0x82 switchvideomode    # Fn+F4 CRT/LCD (high keycode: "displaytoggle")
-
 0xF7 f22                # Fn+F5 Touchpad on
-
 0xF9 f23                # Fn+F5 Touchpad off
-
 0x97 kbdillumdown	# FN+F9 Keyboard backlight down
-
 0x96 kbdillumup         # FN+F10 Keyboard backlight up
-
 0xB3 silentmode         # FN+F11 Silentmode (NOT WORKING)
-
 0xD5 wlan               # FN+F12 WiFi  (NOT WORKING)
-
 ```
 
 **/lib/udev/keymaps/force-release/samsung-other**
 
 ```
-
 # list of scancodes (hex or decimal), optional comment
-
 0xCE # FN+F1 System Settings
-
 0x89 # FN+F2 Brightness down
-
 0x88 # FN+F3 Brightness up
-
 0x82 # FN+F4 Switch video mode
-
 0xCE # FN+F1 System Settings
-
 0x89 # FN+F2 Brightness down
-
 0x88 # FN+F3 Brightness up
-
 0x82 # FN+F4 Switch video mode
-
 0xF7 # Fn+F5 Touchpad on
-
 0xF9 # FN+F5 Turn touchpad off
-
 0x97 # FN+F9 Keyboard backlight down
-
 0x96 # FN+F10 Keyboard backlight up
-
 0xB3 # FN+F11 Silentmode
-
 0xD5 # FN+F12 WiFi
-
 ```
 
 The volumn keys and trackpad all worked for me so I didn't change them.

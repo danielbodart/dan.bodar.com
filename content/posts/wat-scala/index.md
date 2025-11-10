@@ -23,9 +23,7 @@ As I got quoted recently in ["Scala — 1★ Would Not Program Again"](http://ov
 So does anyone know "wat" the following Scala code returns? (Value and Type)
 
 ```
-
 List(1,2,3).toSet()
-
 ```
 
 A Set&lt;Int&gt; containing 1,2,3?

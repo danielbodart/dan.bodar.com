@@ -13,29 +13,22 @@ comments:
 So one of the last things that wasn't perfectly working was coming out of suspend when I opened the lid. First thing you need to so is find the name of the LID switch:
 
 ```
-
 ls /proc/acpi/button/lid/
-
 LID0
 ```
 
 Mine seems to be LID0 or LID1. You can then check it's current state by doing:
 
 ```
-
 cat /proc/acpi/button/lid/LID0/state
-
 state:      open
 ```
 
 Now all you need to do is add this to the wake up list
 
 ```
-
 sudo -s
-
 echo LID0 > /proc/acpi/wakeup
-
 ```
 
 That's it,

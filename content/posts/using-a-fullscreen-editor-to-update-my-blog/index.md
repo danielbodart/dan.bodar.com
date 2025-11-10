@@ -17,11 +17,8 @@ Then I started to look at tools to upload html into my Wordpress blog, I was exp
 And so an hour or two later [html2blog](http://code.google.com/p/html2blog/) was born. And here is how I tied it all together:
 
 ```
-
 stx2any --link-abbrevs --make-title off -T html $1 |
-
  tidy -asxhtml -qc -w 0 | java -jar html2blog.jar
-
 ```
 
 Currently html2blog is very limited in that it always creates a new draft, so the next step will be to make it update an existing entry. I'd also like to get images working at some point.

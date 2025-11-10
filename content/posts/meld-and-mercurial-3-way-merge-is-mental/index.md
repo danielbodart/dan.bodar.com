@@ -13,11 +13,7 @@ comments:
 By default [Meld's](http://meldmerge.org/) 3 way merge combined with [Mercurial](http://mercurial.selenic.com/) merges into the left panel. To make it merge into the middle panel add the following to .hgrc file
 
 ```
-
 [merge-tools]
-
 meld.executable = meld
-
 meld.args = $local $base $other -o $output
-
 ```

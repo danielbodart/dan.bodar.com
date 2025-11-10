@@ -18,13 +18,9 @@ It errored with:
 
 ```
 ./compile runit.c
-
 ./load runit unix.a byte.a -static
-
 /usr/bin/ld: cannot find -lc
-
 collect2: error: ld returned 1 exit status
-
 make: *** [runit] Error 1
 ```
 

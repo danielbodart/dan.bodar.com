@@ -10,7 +10,5 @@ categories:
 ```
 
 HOST=tcp://server:443/
-
 echo ${HOST//tcp/https} # prints https://server:443/
-
 ```
