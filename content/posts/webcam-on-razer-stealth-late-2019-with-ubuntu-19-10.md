@@ -9,18 +9,34 @@ tags:
   - Razor
 ---
 
+<!-- wp:paragraph -->
 <p>Probably the weakest element on the laptop is the Webcam which can output 720p@30fps. By default the low light performance is not that great but you can improve it considerably by trading frame rate for low light performance. </p>
+<!-- /wp:paragraph -->
 
+<!-- wp:paragraph -->
 <p>First install the Video 4 Linux utils:</p>
+<!-- /wp:paragraph -->
 
+<!-- wp:code -->
 <pre class="wp-block-code"><code>sudo apt install v4l-utils</code></pre>
+<!-- /wp:code -->
 
+<!-- wp:paragraph -->
 <p> Now run the following command (the default is 0)</p>
+<!-- /wp:paragraph -->
 
+<!-- wp:code -->
 <pre class="wp-block-code"><code>v4l2-ctl --set-ctrl=exposure_auto_priority=1</code></pre>
+<!-- /wp:code -->
 
+<!-- wp:paragraph -->
 <p>Now we have reduced the noise level considerably you can play with the sharpness levels 0-7 (the default is 3)</p>
+<!-- /wp:paragraph -->
 
+<!-- wp:code -->
 <pre class="wp-block-code"><code>v4l2-ctl --set-ctrl=sharpness=5</code></pre>
+<!-- /wp:code -->
 
+<!-- wp:paragraph -->
 <p></p>
+<!-- /wp:paragraph -->

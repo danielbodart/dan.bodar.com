@@ -10,8 +10,9 @@ This repository includes Go scripts used for the WordPress to Hugo migration:
   - Connects to WordPress MySQL database
   - Exports posts with front matter (title, date, categories, tags)
   - Preserves comments as JSON in front matter
-  - Creates `content/posts/` and `content/pages/` directories
-  - Requires `WP_DB_*` environment variables
+  - Copies images/attachments and rewrites URLs to Hugo paths
+  - Creates `content/posts/`, `content/pages/`, `static/images/`, `static/downloads/` directories
+  - Requires `WP_DB_*`, `WP_SITE_URL`, `WP_BACKUP_DIR` environment variables
 
 - **`query_wp.go`** - Queries WordPress database to compare URL structures
   - Verifies permalink structure compatibility
@@ -33,11 +34,13 @@ export WP_DB_PORT=3306
 export WP_DB_USER=your_user
 export WP_DB_PASSWORD=your_password
 export WP_DB_NAME=your_database
+export WP_SITE_URL=https://your-site.com
+export WP_BACKUP_DIR=/path/to/wordpress/backup
 
 # Execute scripts directly - bootstrap.sh handles setup automatically
-./wp_to_hugo.go
-./query_wp.go
-./verify_urls.go
+./wp_to_hugo.go        # Migrates posts, copies images, rewrites URLs
+./query_wp.go          # Query database for URL structure
+./verify_urls.go       # Verify URL mappings
 ```
 
 ## Hugo Setup

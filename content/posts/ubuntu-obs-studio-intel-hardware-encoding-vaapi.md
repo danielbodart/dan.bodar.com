@@ -14,20 +14,36 @@ tags:
 <p>So I had installed the latest version of OBS Studio (26.x) from the official channels but when I went to the output mode it only listed software encoding. In the logs it mentioned FFMPEG-VAAPI but wasn't using it as any recording was using 30%-50% CPU on a low powered laptop.</p>
 <p>In Settings -> Output change Outmode to Advanced (from Simple) then on Streaming -> Encoder change that to FFMPEG VAAPI (Recoding should just be set to use Streaming Encoder which is the default)<br /><br />But then when I tried to record it</p>
 
+<!-- wp:code -->
 <pre class="wp-block-code"><code>[FFMPEG VAAPI encoder] Failed to open VAAPI codec: Invalid argument</code></pre>
+<!-- /wp:code -->
 
+<!-- wp:paragraph -->
 <p> To fix this I then had to set an environment variable on start </p>
+<!-- /wp:paragraph -->
 
+<!-- wp:code -->
 <pre class="wp-block-code"><code> LIBVA_DRIVER_NAME=i965 obs</code></pre>
+<!-- /wp:code -->
 
+<!-- wp:paragraph -->
 <p>To change the shortcut for OBS I did the following</p>
+<!-- /wp:paragraph -->
 
+<!-- wp:code -->
 <pre class="wp-block-code"><code>cp /usr/share/applications/com.obsproject.Studio.desktop ~/.local/share/applications/
 
 nano ~/.local/share/applications/com.obsproject.Studio.desktop</code></pre>
+<!-- /wp:code -->
 
+<!-- wp:paragraph -->
 <p>Change the Exec line as follows</p>
+<!-- /wp:paragraph -->
 
+<!-- wp:code -->
 <pre class="wp-block-code"><code>Exec=env LIBVA_DRIVER_NAME=i965 obs</code></pre>
+<!-- /wp:code -->
 
+<!-- wp:paragraph -->
 <p>Now recording only uses 5-10% CPU on the same laptop</p>
+<!-- /wp:paragraph -->

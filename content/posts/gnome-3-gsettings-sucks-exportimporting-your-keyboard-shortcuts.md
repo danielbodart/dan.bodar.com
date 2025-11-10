@@ -25,4 +25,4 @@ So
 becomes
 <pre>gsettings set org.gnome.desktop.wm.keybindings show-desktop "['<Super>d', '<Primary><Super>d', '<Super>d']"</pre>
 
-I've created <a href="http://dan.bodar.com/wp-content/uploads/2012/10/keybindings.zip">some keybindins</a> that use the Windows/Super key for window management, plus this don't conflict with IntellJ
+I've created <a href="/downloads/keybindings.zip">some keybindins</a> that use the Windows/Super key for window management, plus this don't conflict with IntellJ

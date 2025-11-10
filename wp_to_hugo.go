@@ -6,9 +6,11 @@ import (
 	"encoding/json"
 	"fmt"
 	"html"
+	"io"
 	"log"
 	"os"
 	"path/filepath"
+	"regexp"
 	"strings"
 	"time"
 
@@ -30,11 +32,13 @@ func getEnv(key, defaultVal string) string {
 }
 
 var (
-	dbHost     = getEnv("WP_DB_HOST", "localhost")
-	dbPort     = getEnv("WP_DB_PORT", "3306")
-	dbUser     = getEnv("WP_DB_USER", "")
-	dbPassword = getEnv("WP_DB_PASSWORD", "")
-	dbName     = getEnv("WP_DB_NAME", "")
+	dbHost      = getEnv("WP_DB_HOST", "localhost")
+	dbPort      = getEnv("WP_DB_PORT", "3306")
+	dbUser      = getEnv("WP_DB_USER", "")
+	dbPassword  = getEnv("WP_DB_PASSWORD", "")
+	dbName      = getEnv("WP_DB_NAME", "")
+	wpBackupDir = getEnv("WP_BACKUP_DIR", "")
+	wpSiteURL   = getEnv("WP_SITE_URL", "")
 )
 
 // Comment represents a WordPress comment
@@ -76,6 +80,65 @@ func cleanHTML(text string) string {
 		return ""
 	}
 	return html.UnescapeString(text)
+}
+
+func copyFile(src, dst string) error {
+	source, err := os.Open(src)
+	if err != nil {
+		return err
+	}
+	defer source.Close()
+
+	os.MkdirAll(filepath.Dir(dst), 0755)
+	destination, err := os.Create(dst)
+	if err != nil {
+		return err
+	}
+	defer destination.Close()
+
+	_, err = io.Copy(destination, source)
+	return err
+}
+
+func processContent(content string) string {
+	if wpSiteURL == "" || wpBackupDir == "" {
+		return content
+	}
+
+	// Find all wp-content/uploads references
+	re := regexp.MustCompile(regexp.QuoteMeta(wpSiteURL) + `/wp-content/uploads/([^"'\s<>]+)`)
+
+	return re.ReplaceAllStringFunc(content, func(match string) string {
+		// Extract the path after /uploads/
+		parts := strings.SplitN(match, "/wp-content/uploads/", 2)
+		if len(parts) != 2 {
+			return match
+		}
+
+		uploadPath := parts[1]
+		srcFile := filepath.Join(wpBackupDir, "html/wp-content/uploads", uploadPath)
+
+		// Determine destination based on file extension
+		ext := strings.ToLower(filepath.Ext(uploadPath))
+		var dstFile string
+		var newURL string
+
+		if ext == ".zip" || ext == ".pdf" || ext == ".tar" || ext == ".gz" {
+			dstFile = filepath.Join(hugoStaticDir, "downloads", filepath.Base(uploadPath))
+			newURL = "/downloads/" + filepath.Base(uploadPath)
+		} else {
+			dstFile = filepath.Join(hugoStaticDir, "images", filepath.Base(uploadPath))
+			newURL = "/images/" + filepath.Base(uploadPath)
+		}
+
+		// Copy the file
+		if err := copyFile(srcFile, dstFile); err != nil {
+			log.Printf("Warning: could not copy %s: %v", srcFile, err)
+			return match
+		}
+
+		return newURL
+	})
 }
 
 func getPostTaxonomies(db *sql.DB, postID int64) ([]string, []string, error) {
@@ -196,7 +259,10 @@ func createHugoPost(post PostData, categories, tags []string, comments []Comment
 	}
 
 	content.WriteString("---\n\n")
-	content.WriteString(cleanHTML(post.Content))
+
+	// Process content to copy images and rewrite URLs
+	processedContent := processContent(cleanHTML(post.Content))
+	content.WriteString(processedContent)
 
 	return content.String()
 }

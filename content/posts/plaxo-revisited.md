@@ -16,7 +16,7 @@ So I though I might also give some feedback to Plaxo that might help improve the
 
 This is where the confusion started for me:
 
-<img src="http://dan.bodar.com/wp-content/uploads/2008/04/plaxo1.gif" alt="Plaxo options" />
+<img src="/images/plaxo1.gif" alt="Plaxo options" />
 
 Option 1 leads you to the old Plaxo address book system
 

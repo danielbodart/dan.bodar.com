@@ -8,7 +8,9 @@ comments:
   - {"author":"Keerthi","email":"keerthi@adaface.com","url":"https://www.adaface.com/pair-pro","date":"2020-06-03T06:26:57Z","content":"Hey Dan! You should checkout PairPro (https://www.adaface.com/pair-pro). It's a new tool for conducting remote pair-programming interviews in a developer-friendly environment.","parent":0}
 ---
 
+<!-- wp:paragraph -->
 <p>Special thanks to<a href="https://scottmuc.com/"> Scott Muc</a> and S+C. Please post more links in the comments and I'll add them in</p>
+<!-- /wp:paragraph -->
 
 <h2 id="a2506978-0b1b-4ad2-83ef-5384a13f0239" class=""><strong>Guides / Playbooks</strong></h2>
 <figure id="783d8347-1728-4980-a51c-519d07feabfb">
@@ -170,4 +172,6 @@ comments:
 <div>Focus Mate - Distraction-free productivity</div>
 <div><a href="https://www.focusmate.com/">https://www.focusmate.com/</a></div>
 
+<!-- wp:paragraph -->
 <p></p>
+<!-- /wp:paragraph -->
