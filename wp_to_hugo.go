@@ -102,15 +102,9 @@ func copyFile(src, dst string) error {
 }
 
 func processContent(content string) string {
-	// Remove WordPress block comments
-	wpCommentRe := regexp.MustCompile(`<!-- wp:[^>]+ -->`)
+	// Remove all WordPress block comments (both opening and closing)
+	wpCommentRe := regexp.MustCompile(`<!-- /?wp:[^>]+ -->`)
 	content = wpCommentRe.ReplaceAllString(content, "")
-
-	// Remove closing WordPress comments
-	content = strings.ReplaceAll(content, "<!-- /wp:paragraph -->", "")
-	content = strings.ReplaceAll(content, "<!-- /wp:code -->", "")
-	content = strings.ReplaceAll(content, "<!-- /wp:list -->", "")
-	content = strings.ReplaceAll(content, "<!-- /wp:heading -->", "")
 
 	// Convert line breaks to <br> so the HTML-to-Markdown converter preserves them
 	content = strings.ReplaceAll(content, "\n", "<br>")
