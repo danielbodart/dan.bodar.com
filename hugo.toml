@@ -6,7 +6,6 @@ enableEmoji = true
 
 [permalinks]
   posts = '/:year/:month/:day/:slug/'
-  pages = '/:slug/'
 
 [module]
   [[module.imports]]

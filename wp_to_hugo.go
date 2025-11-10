@@ -330,15 +330,9 @@ func exportPosts() error {
 		return fmt.Errorf("error getting comments: %w", err)
 	}
 
-	// Create content directory structure
-	postsDir := filepath.Join(hugoContentDir, "posts")
-	pagesDir := filepath.Join(hugoContentDir, "pages")
-
-	if err := os.MkdirAll(postsDir, 0755); err != nil {
-		return fmt.Errorf("error creating posts directory: %w", err)
-	}
-	if err := os.MkdirAll(pagesDir, 0755); err != nil {
-		return fmt.Errorf("error creating pages directory: %w", err)
+	// Create content directory
+	if err := os.MkdirAll(hugoContentDir, 0755); err != nil {
+		return fmt.Errorf("error creating content directory: %w", err)
 	}
 
 	exportedCount := 0
@@ -352,16 +346,9 @@ func exportPosts() error {
 		// Create Hugo content
 		hugoContent := createHugoPost(post, categories, tags, comments)
 
-		// Determine output directory and filename
-		var outputDir string
-		if post.PostType == "page" {
-			outputDir = pagesDir
-		} else {
-			outputDir = postsDir
-		}
-
+		// All posts go in content root
 		filename := fmt.Sprintf("%s.md", post.Slug)
-		outputPath := filepath.Join(outputDir, filename)
+		outputPath := filepath.Join(hugoContentDir, filename)
 
 		// Write file
 		if err := os.WriteFile(outputPath, []byte(hugoContent), 0644); err != nil {
@@ -376,8 +363,7 @@ func exportPosts() error {
 	}
 
 	fmt.Printf("\nExport complete! Exported %d posts/pages\n", exportedCount)
-	fmt.Printf("Posts directory: %s\n", postsDir)
-	fmt.Printf("Pages directory: %s\n", pagesDir)
+	fmt.Printf("Content directory: %s\n", hugoContentDir)
 
 	return nil
 }

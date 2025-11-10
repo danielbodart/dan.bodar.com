@@ -11,7 +11,8 @@ This repository includes Go scripts used for the WordPress to Hugo migration:
   - Exports posts with front matter (title, date, categories, tags)
   - Preserves comments as JSON in front matter
   - Copies images/attachments and rewrites URLs to Hugo paths
-  - Creates `content/posts/`, `content/pages/`, `static/images/`, `static/downloads/` directories
+  - All content exported to `content/` directory (flat structure)
+  - Creates `static/images/` and `static/downloads/` for media files
   - Requires `WP_DB_*`, `WP_SITE_URL`, `WP_BACKUP_DIR` environment variables
 
 - **`verify_urls.go`** - Verifies URL mapping between WordPress and Hugo
@@ -43,7 +44,7 @@ export WP_BACKUP_DIR=/path/to/wordpress/backup
 Standard Hugo configuration with:
 - Theme: [hugo-blog-awesome](https://github.com/hugo-sid/hugo-blog-awesome)
 - Permalinks: `/:year/:month/:day/:slug/` for posts
-- Content in `content/posts/` and `content/pages/`
+- All content in `content/` directory (flat structure)
 - Site: https://dan.bodar.com/
 
 ### Development
