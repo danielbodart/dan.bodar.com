@@ -141,63 +141,68 @@ func processContent(content string) string {
 	})
 }
 
-func getPostTaxonomies(db *sql.DB, postID int64) ([]string, []string, error) {
+func getAllTaxonomies(db *sql.DB) (map[int64][]string, map[int64][]string, error) {
 	query := `
-	SELECT t.name, tt.taxonomy
+	SELECT tr.object_id, t.name, tt.taxonomy
 	FROM wp_term_relationships tr
 	JOIN wp_term_taxonomy tt ON tr.term_taxonomy_id = tt.term_taxonomy_id
 	JOIN wp_terms t ON tt.term_id = t.term_id
-	WHERE tr.object_id = ? AND tt.taxonomy IN ('category', 'post_tag')
+	WHERE tt.taxonomy IN ('category', 'post_tag')
 	`
 
-	rows, err := db.Query(query, postID)
+	rows, err := db.Query(query)
 	if err != nil {
 		return nil, nil, err
 	}
 	defer rows.Close()
 
-	var categories, tags []string
+	categories := make(map[int64][]string)
+	tags := make(map[int64][]string)
+
 	for rows.Next() {
+		var postID int64
 		var name, taxonomy string
-		if err := rows.Scan(&name, &taxonomy); err != nil {
+		if err := rows.Scan(&postID, &name, &taxonomy); err != nil {
 			return nil, nil, err
 		}
 
 		if taxonomy == "category" {
-			categories = append(categories, name)
+			categories[postID] = append(categories[postID], name)
 		} else if taxonomy == "post_tag" {
-			tags = append(tags, name)
+			tags[postID] = append(tags[postID], name)
 		}
 	}
 
 	return categories, tags, nil
 }
 
-func getPostComments(db *sql.DB, postID int64) ([]Comment, error) {
+func getAllComments(db *sql.DB) (map[int64][]Comment, error) {
 	query := `
-	SELECT comment_author, comment_author_email, comment_author_url,
+	SELECT comment_post_ID, comment_author, comment_author_email, comment_author_url,
 	       comment_date, comment_content, comment_parent
 	FROM wp_comments
-	WHERE comment_post_ID = ? AND comment_approved = '1'
-	ORDER BY comment_date ASC
+	WHERE comment_approved = '1'
+	ORDER BY comment_post_ID, comment_date ASC
 	`
 
-	rows, err := db.Query(query, postID)
+	rows, err := db.Query(query)
 	if err != nil {
 		return nil, err
 	}
 	defer rows.Close()
 
-	var comments []Comment
+	comments := make(map[int64][]Comment)
+
 	for rows.Next() {
+		var postID int64
 		var c Comment
 		var commentDate time.Time
-		if err := rows.Scan(&c.Author, &c.Email, &c.URL, &commentDate, &c.Content, &c.Parent); err != nil {
+		if err := rows.Scan(&postID, &c.Author, &c.Email, &c.URL, &commentDate, &c.Content, &c.Parent); err != nil {
 			return nil, err
 		}
 		c.Date = commentDate.Format(time.RFC3339)
 		c.Content = cleanHTML(c.Content)
-		comments = append(comments, c)
+		comments[postID] = append(comments[postID], c)
 	}
 
 	return comments, nil
@@ -314,6 +319,17 @@ func exportPosts() error {
 
 	fmt.Printf("Found %d posts to export\n", len(posts))
 
+	// Load all taxonomies and comments in bulk
+	allCategories, allTags, err := getAllTaxonomies(db)
+	if err != nil {
+		return fmt.Errorf("error getting taxonomies: %w", err)
+	}
+
+	allComments, err := getAllComments(db)
+	if err != nil {
+		return fmt.Errorf("error getting comments: %w", err)
+	}
+
 	// Create content directory structure
 	postsDir := filepath.Join(hugoContentDir, "posts")
 	pagesDir := filepath.Join(hugoContentDir, "pages")
@@ -328,17 +344,10 @@ func exportPosts() error {
 	exportedCount := 0
 
 	for _, post := range posts {
-		// Get taxonomies
-		categories, tags, err := getPostTaxonomies(db, post.ID)
-		if err != nil {
-			log.Printf("Warning: error getting taxonomies for post %d: %v", post.ID, err)
-		}
-
-		// Get comments
-		comments, err := getPostComments(db, post.ID)
-		if err != nil {
-			log.Printf("Warning: error getting comments for post %d: %v", post.ID, err)
-		}
+		// Lookup taxonomies and comments from maps
+		categories := allCategories[post.ID]
+		tags := allTags[post.ID]
+		comments := allComments[post.ID]
 
 		// Create Hugo content
 		hugoContent := createHugoPost(post, categories, tags, comments)
