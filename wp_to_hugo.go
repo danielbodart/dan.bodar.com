@@ -105,8 +105,16 @@ func processContent(content string, postSlug string, postType string) string {
 	wpCommentRe := regexp.MustCompile(`<!-- /?wp:[^>]+ -->`)
 	content = wpCommentRe.ReplaceAllString(content, "")
 
+	// WordPress sometimes already has <br> or <br /> tags - normalize them to newlines first
+	content = regexp.MustCompile(`<br\s*/?>`).ReplaceAllString(content, "\n")
+
+	// Convert line breaks to <br> so the HTML-to-Markdown converter preserves them
+	// But we need to do this BEFORE we create code blocks, so they don't get affected
+	content = strings.ReplaceAll(content, "\n", "<br>")
+
 	// Convert WordPress code shortcodes to HTML pre/code blocks
 	// Match [language]...[/language] patterns for common languages
+	// This needs to happen AFTER <br> conversion so code blocks are preserved properly
 	languages := []string{"java", "javascript", "csharp", "python", "go", "bash", "sql", "xml", "html", "css"}
 	for _, lang := range languages {
 		pattern := fmt.Sprintf(`\[%s\]([\s\S]*?)\[/%s\]`, lang, lang)
@@ -115,18 +123,14 @@ func processContent(content string, postSlug string, postType string) string {
 			submatches := codeRe.FindStringSubmatch(match)
 			if len(submatches) == 2 {
 				code := submatches[1]
+				// Remove the <br> tags that were added inside the code block
+				code = strings.ReplaceAll(code, "<br>", "\n")
 				// Wrap in pre/code tags with language class for markdown converter
 				return fmt.Sprintf(`<pre><code class="language-%s">%s</code></pre>`, lang, code)
 			}
 			return match
 		})
 	}
-
-	// WordPress sometimes already has <br> or <br /> tags - normalize them to newlines first
-	content = regexp.MustCompile(`<br\s*/?>`).ReplaceAllString(content, "\n")
-
-	// Convert line breaks to <br> so the HTML-to-Markdown converter preserves them
-	content = strings.ReplaceAll(content, "\n", "<br>")
 
 	// Convert HTML to Markdown
 	markdown, err := md.ConvertString(content)

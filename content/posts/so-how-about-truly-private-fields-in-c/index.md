@@ -15,31 +15,17 @@ After the crazy !@$%  with JavaScript yesterday I said to Christian, I bet we c
 ```csharp
 
 
-
-
 class Purse
-
 {
-
     public Func<int> get;
-
     public Action<int> set;
 
-
-
     public Purse(int money)
-
     {
-
         get = () => { return money; };
-
         set = (newMoney) => { money = newMoney ; };
-
     }
-
 }
-
-
 
 ```
 
@@ -48,15 +34,9 @@ And here is the test ...
 ```csharp
 
 
-
-
 var p = new Purse(2);
-
 p.set(p.get() + 1);
-
 Assert.AreEqual(3, p.get());
-
-
 
 ```
 
