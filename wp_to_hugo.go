@@ -139,6 +139,11 @@ func processContent(content string, postSlug string, postType string) string {
 		markdown = content
 	}
 
+	// Fix malformed links where URL is in the link text and placeholder is in the href
+	// Pattern: [https://example.com](_wp_link_placeholder) -> https://example.com
+	linkFixRe := regexp.MustCompile(`\[(https?://[^\]]+)\]\([^)]*\)`)
+	markdown = linkFixRe.ReplaceAllString(markdown, "$1")
+
 	// Process image/attachment URLs and copy files
 	if wpSiteURL != "" && wpBackupDir != "" {
 		// Match both http:// and https:// versions of the site URL

@@ -7,8 +7,8 @@ categories:
 ---
 
 **Smart Contracts**  
-[http://www.erights.org/smart-contracts/index.html](http://www.erights.org/smart-contracts/index.html)  
-[http://www.waterken.com/dev/IOU/Design/](http://www.waterken.com/dev/IOU/Design/)
+http://www.erights.org/smart-contracts/index.html  
+http://www.waterken.com/dev/IOU/Design/
 
 We may end up getting RESTful smart contracts for free due to all the goodness in the current design. This could lead (my client).com to an unheard of level of security and possible make it the most high profile public implementation of smart contracts to date. Watch this space
 
