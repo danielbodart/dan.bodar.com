@@ -21,7 +21,6 @@ import (
 // Configuration
 const (
 	hugoContentDir = "content"
-	hugoStaticDir  = "static"
 )
 
 // Database configuration from environment variables
@@ -101,7 +100,7 @@ func copyFile(src, dst string) error {
 	return err
 }
 
-func processContent(content string) string {
+func processContent(content string, postSlug string, postType string) string {
 	// Remove all WordPress block comments (both opening and closing)
 	wpCommentRe := regexp.MustCompile(`<!-- /?wp:[^>]+ -->`)
 	content = wpCommentRe.ReplaceAllString(content, "")
@@ -121,7 +120,9 @@ func processContent(content string) string {
 
 	// Process image/attachment URLs and copy files
 	if wpSiteURL != "" && wpBackupDir != "" {
-		re := regexp.MustCompile(regexp.QuoteMeta(wpSiteURL) + `/wp-content/uploads/([^"'\s<>)]+)`)
+		// Match both http:// and https:// versions of the site URL
+		siteURLPattern := strings.Replace(regexp.QuoteMeta(wpSiteURL), "https://", "https?://", 1)
+		re := regexp.MustCompile(siteURLPattern + `/wp-content/uploads/([^"'\s<>)]+)`)
 		markdown = re.ReplaceAllStringFunc(markdown, func(match string) string {
 			// Extract the path after /uploads/
 			parts := strings.SplitN(match, "/wp-content/uploads/", 2)
@@ -132,18 +133,17 @@ func processContent(content string) string {
 			uploadPath := parts[1]
 			srcFile := filepath.Join(wpBackupDir, "html/wp-content/uploads", uploadPath)
 
-			// Determine destination based on file extension
-			ext := strings.ToLower(filepath.Ext(uploadPath))
-			var dstFile string
-			var newURL string
-
-			if ext == ".zip" || ext == ".pdf" || ext == ".tar" || ext == ".gz" {
-				dstFile = filepath.Join(hugoStaticDir, "downloads", filepath.Base(uploadPath))
-				newURL = "/downloads/" + filepath.Base(uploadPath)
+			// Determine destination directory based on post type
+			var postDir string
+			if postType == "page" {
+				postDir = filepath.Join(hugoContentDir, postSlug)
 			} else {
-				dstFile = filepath.Join(hugoStaticDir, "images", filepath.Base(uploadPath))
-				newURL = "/images/" + filepath.Base(uploadPath)
+				postDir = filepath.Join(hugoContentDir, "posts", postSlug)
 			}
+
+			// Copy file to post directory with original filename
+			filename := filepath.Base(uploadPath)
+			dstFile := filepath.Join(postDir, filename)
 
 			// Copy the file
 			if err := copyFile(srcFile, dstFile); err != nil {
@@ -151,7 +151,8 @@ func processContent(content string) string {
 				return match
 			}
 
-			return newURL
+			// Return relative path (just the filename since it's in the same directory)
+			return filename
 		})
 	}
 
@@ -283,7 +284,7 @@ func createHugoPost(post PostData, categories, tags []string, comments []Comment
 	content.WriteString("---\n\n")
 
 	// Process content: convert to markdown, remove WP comments, copy images, rewrite URLs
-	processedContent := processContent(post.Content)
+	processedContent := processContent(post.Content, post.Slug, post.PostType)
 	content.WriteString(processedContent)
 
 	return content.String()
@@ -352,6 +353,19 @@ func exportPosts() error {
 		return fmt.Errorf("error creating content directory: %w", err)
 	}
 
+	// Create posts section with _index.md
+	postsDir := filepath.Join(hugoContentDir, "posts")
+	if err := os.MkdirAll(postsDir, 0755); err != nil {
+		return fmt.Errorf("error creating posts directory: %w", err)
+	}
+	postsIndexContent := `---
+title: "Posts"
+---
+`
+	if err := os.WriteFile(filepath.Join(postsDir, "_index.md"), []byte(postsIndexContent), 0644); err != nil {
+		return fmt.Errorf("error creating posts _index.md: %w", err)
+	}
+
 	exportedCount := 0
 
 	for _, post := range posts {
@@ -360,12 +374,26 @@ func exportPosts() error {
 		tags := allTags[post.ID]
 		comments := allComments[post.ID]
 
-		// Create Hugo content
-		hugoContent := createHugoPost(post, categories, tags, comments)
+		// Determine output path based on post type
+		var outputPath string
+		if post.PostType == "page" {
+			// Pages go in their own directory with index.md
+			outputDir := filepath.Join(hugoContentDir, post.Slug)
+			if err := os.MkdirAll(outputDir, 0755); err != nil {
+				return fmt.Errorf("error creating page directory %s: %w", outputDir, err)
+			}
+			outputPath = filepath.Join(outputDir, "index.md")
+		} else {
+			// Posts go in content/posts/slug/index.md (page bundle)
+			outputDir := filepath.Join(hugoContentDir, "posts", post.Slug)
+			if err := os.MkdirAll(outputDir, 0755); err != nil {
+				return fmt.Errorf("error creating post directory %s: %w", outputDir, err)
+			}
+			outputPath = filepath.Join(outputDir, "index.md")
+		}
 
-		// All posts go in content root
-		filename := fmt.Sprintf("%s.md", post.Slug)
-		outputPath := filepath.Join(hugoContentDir, filename)
+		// Create Hugo content (images will be copied during content processing)
+		hugoContent := createHugoPost(post, categories, tags, comments)
 
 		// Write file
 		if err := os.WriteFile(outputPath, []byte(hugoContent), 0644); err != nil {

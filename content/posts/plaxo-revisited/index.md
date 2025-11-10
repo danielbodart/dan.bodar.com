@@ -16,7 +16,7 @@ So I though I might also give some feedback to Plaxo that might help improve the
 
 This is where the confusion started for me:
 
-![Plaxo options](/images/plaxo1.gif)
+![Plaxo options](plaxo1.gif)
 
 Option 1 leads you to the old Plaxo address book system
 

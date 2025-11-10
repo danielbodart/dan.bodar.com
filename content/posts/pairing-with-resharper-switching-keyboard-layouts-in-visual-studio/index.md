@@ -11,7 +11,7 @@ comments:
 
 So at my current client we have a bunch of Devs that are fairly recent converts to Resharper and a bunch of old hats who know IntelliJ or have used Resharper since Version 1. We are pairing but we know different keyboard layouts and don't want to decrease productivity by making one lot relearn the other layout. So with some searching around I found out how to create new layouts and using a simple macro switch between them. 
 
-Please see [attached zip](/downloads/keyboardlayout.zip)
+Please see [attached zip](keyboardlayout.zip)
 
 **References:**
 

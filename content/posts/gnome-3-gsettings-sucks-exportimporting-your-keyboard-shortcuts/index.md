@@ -35,4 +35,4 @@ becomes
 gsettings set org.gnome.desktop.wm.keybindings show-desktop "['<Super>d', '<Primary><Super>d', '<Super>d']"
 ```
 
-I've created [some keybindins](/downloads/keybindings.zip) that use the Windows/Super key for window management, plus this don't conflict with IntellJ
+I've created [some keybindins](keybindings.zip) that use the Windows/Super key for window management, plus this don't conflict with IntellJ
