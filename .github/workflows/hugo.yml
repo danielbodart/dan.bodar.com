@@ -9,6 +9,7 @@ permissions:
   contents: read
   pages: write
   id-token: write
+  packages: write
 
 concurrency:
   group: "pages"
@@ -19,8 +20,32 @@ defaults:
     shell: bash
 
 jobs:
+  build-base-image:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push base image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile.base
+          push: true
+          tags: ghcr.io/danielbodart/dan.bodar.com:latest
+
   build:
     runs-on: ubuntu-latest
+    needs: build-base-image
+    container:
+      image: ghcr.io/danielbodart/dan.bodar.com:latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -30,7 +55,9 @@ jobs:
         uses: actions/configure-pages@v5
 
       - name: Build with Hugo
-        run: ./run build
+        run: |
+          source /workspace/bootstrap.sh
+          ./run build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
