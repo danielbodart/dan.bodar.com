@@ -14,31 +14,33 @@ Now the language doesn't have a key word but I knew that you could use function 
 
 So after 5 minutes here is what we came up with:
 
-\[javascript]  
-function Purse(money) {  
-this.getMoney = function() {  
-return money;  
-}  
-this.setMoney = function(newMoney) {  
-money = newMoney;  
-}  
-}  
-\[/javascript]
+```javascript
+
+function Purse(money) {
+	this.getMoney = function() {
+		return money;
+	}
+	this.setMoney = function(newMoney) {
+		money = newMoney;
+	}
+}
+```
 
 This will create a truely private field that can only be accessed via the methods.
 
 You can still mix your private getters and setters with prototype methods. eg:
 
-\[javascript]  
-Purse.prototype = {  
-add : function( money ) {  
-this.setMoney(this.getMoney() + money);  
-}  
+```javascript
+
+Purse.prototype = {
+	add : function( money ) {
+		this.setMoney(this.getMoney() + money);
+	}
 }
 
-var p = new Purse(2);  
-p.add( 1 );  
-p.getMoney(); returns 3  
-\[/javascript]
+var p = new Purse(2);
+p.add( 1 );
+p.getMoney(); returns 3
+```
 
 If you tried to access the money field directly it would be undefined.

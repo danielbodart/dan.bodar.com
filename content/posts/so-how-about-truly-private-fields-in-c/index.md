@@ -12,30 +12,52 @@ UPDATE: Jim pointed out that you can access the field via reflecting over the de
 
 After the crazy !@$%  with JavaScript yesterday I said to Christian, I bet we can do this with C# lambda. So the challenge was set....
 
-\[csharp]
+```csharp
 
-class Purse  
-{  
-public Func&lt;int&gt; get;  
-public Action&lt;int&gt; set;
 
-public Purse(int money)  
-{  
-get = () =&gt; { return money; };  
-set = (newMoney) =&gt; { money = newMoney ; };  
-}  
+
+
+class Purse
+
+{
+
+    public Func<int> get;
+
+    public Action<int> set;
+
+
+
+    public Purse(int money)
+
+    {
+
+        get = () => { return money; };
+
+        set = (newMoney) => { money = newMoney ; };
+
+    }
+
 }
 
-\[/csharp]
+
+
+```
 
 And here is the test ...
 
-\[csharp]
+```csharp
 
-var p = new Purse(2);  
-p.set(p.get() + 1);  
+
+
+
+var p = new Purse(2);
+
+p.set(p.get() + 1);
+
 Assert.AreEqual(3, p.get());
 
-\[/csharp]
+
+
+```
 
 If you tried to use reflection, as expected there is no field to inspect.

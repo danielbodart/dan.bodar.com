@@ -105,6 +105,23 @@ func processContent(content string, postSlug string, postType string) string {
 	wpCommentRe := regexp.MustCompile(`<!-- /?wp:[^>]+ -->`)
 	content = wpCommentRe.ReplaceAllString(content, "")
 
+	// Convert WordPress code shortcodes to HTML pre/code blocks
+	// Match [language]...[/language] patterns for common languages
+	languages := []string{"java", "javascript", "csharp", "python", "go", "bash", "sql", "xml", "html", "css"}
+	for _, lang := range languages {
+		pattern := fmt.Sprintf(`\[%s\]([\s\S]*?)\[/%s\]`, lang, lang)
+		codeRe := regexp.MustCompile(pattern)
+		content = codeRe.ReplaceAllStringFunc(content, func(match string) string {
+			submatches := codeRe.FindStringSubmatch(match)
+			if len(submatches) == 2 {
+				code := submatches[1]
+				// Wrap in pre/code tags with language class for markdown converter
+				return fmt.Sprintf(`<pre><code class="language-%s">%s</code></pre>`, lang, code)
+			}
+			return match
+		})
+	}
+
 	// WordPress sometimes already has <br> or <br /> tags - normalize them to newlines first
 	content = regexp.MustCompile(`<br\s*/?>`).ReplaceAllString(content, "\n")
 
