@@ -17,8 +17,8 @@ import (
 
 // Configuration
 const (
-	hugoContentDir = "/home/dan/Projects/dan.bodar.com/content"
-	hugoStaticDir  = "/home/dan/Projects/dan.bodar.com/static"
+	hugoContentDir = "content"
+	hugoStaticDir  = "static"
 )
 
 // Database configuration from environment variables
