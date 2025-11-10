@@ -11,4 +11,4 @@ comments:
   - {"author":"dan","email":"dan@bodar.com","url":"http://","date":"2012-11-26T17:10:36Z","content":"I've fixed the DNS but it might take a while, in the mean time go direct to\r\n\r\nhttp://presumptions.bodar.com/index.html","parent":0}
 ---
 
-<a href="http://presumptions.bodar.com/">http://presumptions.bodar.com/</a>
+[http://presumptions.bodar.com/](http://presumptions.bodar.com/)

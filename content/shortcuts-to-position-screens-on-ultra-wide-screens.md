@@ -8,7 +8,14 @@ categories:
   - memory
 ---
 
-<strong>left</strong> (Ctrl+Super+Left): 
-<pre>wmctrl -r :ACTIVE: -e 0,0,0,1280,1032</pre>
-<strong>right</strong> (Ctrl+Super+Right): 
-<pre>wmctrl -r :ACTIVE: -e 0,1280,0,1280,1032</pre>
+**left** (Ctrl+Super+Left):
+
+```
+wmctrl -r :ACTIVE: -e 0,0,0,1280,1032
+```
+
+**right** (Ctrl+Super+Right):
+
+```
+wmctrl -r :ACTIVE: -e 0,1280,0,1280,1032
+```

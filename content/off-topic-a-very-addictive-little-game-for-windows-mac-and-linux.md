@@ -6,6 +6,6 @@ categories:
   - Uncategorized
 ---
 
-<a href="http://www.hemispheregames.com/osmos/">http://www.hemispheregames.com/osmos/</a>
+[http://www.hemispheregames.com/osmos/](http://www.hemispheregames.com/osmos/)
 
 Very chilled out...

@@ -6,5 +6,5 @@ categories:
   - Uncategorized
 ---
 
-<a href="http://prezi.com/urkus7bs4gqw/crazy-fast-build-times/">Prezi</a>
-The <a href="http://dan.bodar.com/2012/02/28/crazy-fast-build-times-or-when-10-seconds-starts-to-make-you-nervous/">original blog post / rant </a>
+[Prezi](http://prezi.com/urkus7bs4gqw/crazy-fast-build-times/)  
+The [original blog post / rant](http://dan.bodar.com/2012/02/28/crazy-fast-build-times-or-when-10-seconds-starts-to-make-you-nervous/)

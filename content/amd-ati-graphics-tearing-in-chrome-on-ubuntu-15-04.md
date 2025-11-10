@@ -10,13 +10,10 @@ categories:
 
 I had to switch to using proprietor AMD drivers as the open source ones don't support audio via display port, but after switching, Chrome was tearing and just going completely black.
 
-The <a href="chrome://gpu/">chrome GPU</a> page reported no hardware acceleration enabled.
+The [chrome GPU](chrome://gpu/) page reported no hardware acceleration enabled.
 
-So I went to <a href="chrome://flags/">Chrome Flags</a> page and forced GPU acceleration and rasterisation
+So I went to [Chrome Flags](chrome://flags/) page and forced GPU acceleration and rasterisation
 
-<b>Override software rendering list</b> -> Disabled
-<b>Enable GPU rasterization</b> -> Force enabled on all layers
-<b>Smooth Scrolling Linux</b> -> Enable
-
-
-
+**Override software rendering list** -&gt; Disabled  
+**Enable GPU rasterization** -&gt; Force enabled on all layers  
+**Smooth Scrolling Linux** -&gt; Enable

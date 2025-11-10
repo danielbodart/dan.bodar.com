@@ -8,4 +8,6 @@ categories:
   - linux
 ---
 
-<pre><code>DIR=`dirname $(readlink -f $0)`</code></pre>
+```
+DIR=`dirname $(readlink -f $0)`
+```

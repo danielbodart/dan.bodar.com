@@ -13,33 +13,44 @@ comments:
 ---
 
 I was creating a Jar via the Java API's and I couldn't get it to run my main class:
-<pre> $ java -jar foo.jar
+
+```
+ $ java -jar foo.jar
 Error: Invalid or corrupt jarfile foo.jar
-</pre>
+```
+
 Running it via the class path worked fine:
-<pre> $ java -cp foo.jar Bar
+
+```
+ $ java -cp foo.jar Bar
 Hello world!
-</pre>
+```
+
 So now I knew it was something to do with the manifest file but it wasn't being caused by
-<ul>
- 	<li>The 65535 file limit (<a href="https://blogs.oracle.com/xuemingshen/entry/zip64_support_for_4g_zipfile">See Zip64 and Java 7</a> ).</li>
- 	<li><a href="http://docs.oracle.com/javase/7/docs/technotes/guides/jar/jar.html#Notes_on_Manifest_and_Signature_Files">The 72 bytes limit per line</a></li>
- 	<li>Missing newline at the end of the Main-Class (Displays "no main manifest attribute, in foo.jar"</li>
- 	<li>A blank line before Main-Class (Displays "Error: An unexpected error occurred while trying to open file foo.jar"</li>
-</ul>
+
+- The 65535 file limit ([See Zip64 and Java 7](https://blogs.oracle.com/xuemingshen/entry/zip64_support_for_4g_zipfile) ).
+- [The 72 bytes limit per line](http://docs.oracle.com/javase/7/docs/technotes/guides/jar/jar.html#Notes_on_Manifest_and_Signature_Files)
+- Missing newline at the end of the Main-Class (Displays "no main manifest attribute, in foo.jar"
+- A blank line before Main-Class (Displays "Error: An unexpected error occurred while trying to open file foo.jar"
+
 So after scratching my head for a while I tried comparing a working jar with the failing jar:
-<pre>$ unzip -lv foo.jar 
+
+```
+$ unzip -lv foo.jar 
 Archive:  foo.jar
  Length   Method    Size  Cmpr    Date    Time   CRC-32   Name
 --------  ------  ------- ---- ---------- ----- --------  ----
       75  Defl:N       75   0% 2014-02-17 16:01 b1eac370  META-INF/MANIFEST.MF
      825  Defl:N      464  44% 2014-02-17 16:01 942f187c  Working.class
-</pre>
-<pre>$ unzip -lv foo.jar 
+```
+
+```
+$ unzip -lv foo.jar 
 Archive:  foo.jar
  Length   Method    Size  Cmpr    Date    Time   CRC-32   Name
 --------  ------  ------- ---- ---------- ----- --------  ----
       75  Defl:N       75   0% 2014-02-17 16:01 b1eac370  /META-INF/MANIFEST.MF
      825  Defl:N      464  44% 2014-02-17 16:01 942f187c  Failing.class
-</pre>
+```
+
 So don't prefix the META-INF folder with a slash! Also note it is case sensitive!

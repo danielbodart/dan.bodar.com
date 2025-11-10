@@ -14,8 +14,10 @@ comments:
   - {"author":"Zebedeeboss","email":"zebedee.boss@gmail.com","url":"","date":"2018-04-04T08:17:02Z","content":"My go to Nvenc install guide - never fails - Thank You","parent":0}
 ---
 
-This mini guide will show you how to rebuild the exact version of FFmpeg that comes with your version of Ubuntu and just add support for NVidia GPU encoding via the NVENC API and ACC via libfdk_aac.
-<pre><code>
+This mini guide will show you how to rebuild the exact version of FFmpeg that comes with your version of Ubuntu and just add support for NVidia GPU encoding via the NVENC API and ACC via libfdk\_aac.
+
+```
+
 # Download and unzip the NVIDIA Video Codec SDK from https://developer.nvidia.com/nvidia-video-codec-sdk
 wget https://developer.nvidia.com/video-sdk-601
 unzip nvidia_video_sdk_6.0.1.zip
@@ -49,4 +51,4 @@ make
 # And finally install it over the original
 sudo make install
 
-</code></pre>
+```

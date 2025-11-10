@@ -9,4 +9,4 @@ comments:
   - {"author":"dan","email":"dan@bodar.com","url":"http://","date":"2016-02-18T21:56:07Z","content":"Well if you can build docker inside docker I don't see why not!","parent":18054}
 ---
 
-Related to my <a href="http://www.infoq.com/presentations/Crazy-Fast-Build-Times-or-When-10-Seconds-Starts-to-Make-You-Nervous">QCon talk</a> and original <a href="http://dan.bodar.com/2012/02/28/crazy-fast-build-times-or-when-10-seconds-starts-to-make-you-nervous/">blog post</a>, I'm soft launching my <a href="https://10second.build/">10second.build</a> project.
+Related to my [QCon talk](http://www.infoq.com/presentations/Crazy-Fast-Build-Times-or-When-10-Seconds-Starts-to-Make-You-Nervous) and original [blog post](http://dan.bodar.com/2012/02/28/crazy-fast-build-times-or-when-10-seconds-starts-to-make-you-nervous/), I'm soft launching my [10second.build](https://10second.build/) project.

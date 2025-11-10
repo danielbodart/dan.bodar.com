@@ -9,27 +9,38 @@ comments:
   - {"author":"sai","email":"sairsi_2k2@yahoo.com","url":"","date":"2015-03-10T02:38:52Z","content":"Excellent. you made my day..","parent":0}
 ---
 
-So if you just downloaded the latest <a href="https://01.org/linuxgraphics/">Intel Graphics Installer</a> and just found that it doesn't support Ubuntu 14.10.
+So if you just downloaded the latest [Intel Graphics Installer](https://01.org/linuxgraphics/) and just found that it doesn't support Ubuntu 14.10.
 
 Fear not you can trick it into installing by doing the following:
 
 First backup
-<pre>sudo cp /etc/lsb-release /etc/lsb-release.backup</pre>
+
+```
+sudo cp /etc/lsb-release /etc/lsb-release.backup
+```
 
 Then edit the file
-<pre>sudo nano /etc/lsb-release</pre>
+
+```
+sudo nano /etc/lsb-release
+```
 
 And put the following in there
 
-<pre>DISTRIB_RELEASE=14.04
-DISTRIB_CODENAME=trusty</pre>
+```
+DISTRIB_RELEASE=14.04
+
+DISTRIB_CODENAME=trusty
+```
 
 This will allow the installer to proceed but you will also want to add the public key so updates work correctly:
 
-<pre>wget --no-check-certificate https://download.01.org/gfx/RPM-GPG-KEY-ilg -O - | sudo apt-key add -
-wget --no-check-certificate https://download.01.org/gfx/RPM-GPG-KEY-ilg-2 -O - | sudo apt-key add - </pre>
+```
+wget --no-check-certificate https://download.01.org/gfx/RPM-GPG-KEY-ilg -O - | sudo apt-key add -
 
+wget --no-check-certificate https://download.01.org/gfx/RPM-GPG-KEY-ilg-2 -O - | sudo apt-key add - 
+```
 
-Original articles:
-<a href="http://askubuntu.com/questions/553581/distribution-not-supported-when-trying-to-install-intel-graphics-installer-in">“Distribution not supported” when trying to install Intel Graphics Installer in 14.10</a>
-<a href="http://askubuntu.com/questions/339476/intel-linux-graphic-drivers">Intel Linux Graphic Drivers</a>
+Original articles:  
+[“Distribution not supported” when trying to install Intel Graphics Installer in 14.10](http://askubuntu.com/questions/553581/distribution-not-supported-when-trying-to-install-intel-graphics-installer-in)  
+[Intel Linux Graphic Drivers](http://askubuntu.com/questions/339476/intel-linux-graphic-drivers)

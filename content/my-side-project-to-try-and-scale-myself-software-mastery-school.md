@@ -10,30 +10,21 @@ comments:
   - {"author":"Ptolemy","email":"ptolemybarnes@gmail.com","url":"","date":"2020-02-14T16:01:36Z","content":"Re: screen capture. Yes if you could weave some real code in, that would be great. It might be difficult to find bite-sized examples though. \r\n\r\nThe points about attitude and approach are the most interesting to me, e.g \"To go really really fast you need to consciously go really really slow\".\r\n\r\nIt strikes me that there are few role models in software for this kind of thing - perhaps because it's an activity that's difficult to observe. I find myself looking elsewhere for inspiration. I have been watching Adam Ondra's (world-famous climber) 'Road to Tokyo' youtube series recently. He'll often spend an hour analysing and mentally rehearsing a boulder problem before he even gets on the wall.","parent":0}
 ---
 
-<!-- wp:paragraph -->
-<p>So I've been working on a little side project for the last couple of weeks to try and create a video based training school to allow myself to scale and maybe not have to repeat myself as much when ever I join a new client.</p>
-<!-- /wp:paragraph -->
+So I've been working on a little side project for the last couple of weeks to try and create a video based training school to allow myself to scale and maybe not have to repeat myself as much when ever I join a new client.
 
-<!-- wp:paragraph -->
-<p>So I decided to take my post on the <a href="http://dan.bodar.com/2019/02/09/uncommon-sense/">Uncommon Sense</a> and turn that into a <a href="https://software-mastery.teachable.com/p/uncommon-sense/">mini course</a> to try things out.</p>
-<!-- /wp:paragraph -->
+So I decided to take my post on the [Uncommon Sense](http://dan.bodar.com/2019/02/09/uncommon-sense/) and turn that into a [mini course](https://software-mastery.teachable.com/p/uncommon-sense/) to try things out.
 
-<!-- wp:paragraph -->
-<p>This was in some ways just an excuse to learn about DSLR filming (read buy some toys), non-linear editing, colour grading etc. Now it's not perfect (the audio isn't great as my shotgun mic wasn't working) but it feels good enough to share.</p>
-<!-- /wp:paragraph -->
+This was in some ways just an excuse to learn about DSLR filming (read buy some toys), non-linear editing, colour grading etc. Now it's not perfect (the audio isn't great as my shotgun mic wasn't working) but it feels good enough to share.
 
-<!-- wp:paragraph -->
-<p>Let me know what you think or what else you might like to see.</p>
-<!-- /wp:paragraph -->
+Let me know what you think or what else you might like to see.
 
-<!-- wp:paragraph -->
-<p>Shot with:</p>
-<!-- /wp:paragraph -->
+Shot with:
 
-<!-- wp:list -->
-<ul><li>Panasonic G80</li><li>Leica 15mm f1.7 Lens</li><li>Movo VXR10GY (was not correctly wired in!)</li><li>Joby GorillaPod</li><li>Blackmagic DeckLink (YUV:422 HDMI 1080p29.97)</li><li>Capture: MediaExpress (MJPEG)</li><li>Edit/Colour/Export: Davinci Resolve (MP4 - H264)</li><li>Teachable Hosting</li></ul>
-<!-- /wp:list -->
-
-<!-- wp:paragraph -->
-<p></p>
-<!-- /wp:paragraph -->
+- Panasonic G80
+- Leica 15mm f1.7 Lens
+- Movo VXR10GY (was not correctly wired in!)
+- Joby GorillaPod
+- Blackmagic DeckLink (YUV:422 HDMI 1080p29.97)
+- Capture: MediaExpress (MJPEG)
+- Edit/Colour/Export: Davinci Resolve (MP4 - H264)
+- Teachable Hosting

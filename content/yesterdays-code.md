@@ -6,4 +6,4 @@ categories:
   - Uncategorized
 ---
 
-Absolutely love <a href="http://thecodelesscode.com/case/13">this</a>
+Absolutely love [this](http://thecodelesscode.com/case/13)

@@ -7,5 +7,8 @@ categories:
   - memory
 ---
 
-<pre>dconf reset -f /org/gnome/gnome-panel/
-killall gnome-panel</pre>
+```
+dconf reset -f /org/gnome/gnome-panel/
+
+killall gnome-panel
+```

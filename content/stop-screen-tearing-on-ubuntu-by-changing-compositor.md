@@ -9,10 +9,19 @@ categories:
 ---
 
 Install Compton (https://github.com/chjj/compton/)
-<pre><code>sudo apt-get install compton 
-</code></pre>
+
+```
+sudo apt-get install compton 
+```
+
 Disable existing compositor (I used Metacity with Gnome Flashback)
-<pre><code>gsettings set org.gnome.metacity compositing-manager false
-</code></pre>
+
+```
+gsettings set org.gnome.metacity compositing-manager false
+```
+
 Add Compton to "Startup Applications"
-<pre><code>compton --backend glx --paint-on-overlay --vsync opengl-swc</code></pre>
+
+```
+compton --backend glx --paint-on-overlay --vsync opengl-swc
+```

@@ -10,17 +10,17 @@ I had to start the install CD in safe VGA mode and have not got the slash to dis
 
 To get sound to work you don't need to recompile your kernel or go back to an earlier version just follow method G one this page:
 
-<a href="https://wiki.ubuntu.com/Gutsy_Intel_HD_Audio_Controller#head-0e5a1c0b384a3886c7776913e401a039809c84c9">Gutsy Intel HD Audio Controller</a>
+[Gutsy Intel HD Audio Controller](https://wiki.ubuntu.com/Gutsy_Intel_HD_Audio_Controller#head-0e5a1c0b384a3886c7776913e401a039809c84c9)
 
 or
 
-<code>sudo aptitude install linux-backports-modules-generic</code>
+`sudo aptitude install linux-backports-modules-generic`
 
-<code>sudo gedit /etc/modprobe.d/alsa-base</code>
+`sudo gedit /etc/modprobe.d/alsa-base`
 
 In the editor, add the following line at the end of the file:
 
-<code>options snd-hda-intel model=dell-m42</code>
+`options snd-hda-intel model=dell-m42`
 
 Save the file and reboot to get sound working correctly.
 

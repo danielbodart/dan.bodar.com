@@ -12,40 +12,36 @@ comments:
   - {"author":"dan","email":"dan@bodar.com","url":"","date":"2019-02-10T08:35:57Z","content":"Yes exactly, nothing has changed in the last 2 years. Trunk based development has been around for at least 20 years and is still the reserve of the highest performing teams. See https://trunkbaseddevelopment.com/","parent":0}
 ---
 
-After reading <a href="https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow" target="_blank">Atlassian</a> worflow comparison and Vincent Driessen <a href="http://nvie.com/posts/a-successful-git-branching-model/" target="_blank">original post</a> about GitFlow I have come to realise a couple of worrying things:
-<ul>
- 	<li>I incorrectly assumed GitFlow was the same thing as <a href="https://guides.github.com/introduction/flow/index.html">GitHub flow</a> (fork project, do work then pull request)</li>
- 	<li>This model appears to be popular but it seems totally archaic to me
-<ul>
- 	<li>Requires lots of merging especially if you refactor at lot.</li>
- 	<li>Doesn't do CD</li>
- 	<li>Requires lots of manual work</li>
- 	<li>Master and develop seem the wrong way around to me</li>
- 	<li>How many branches?</li>
-</ul>
-</li>
- 	<li>I use pull requests but don't use feature branches which the Atlassian article implies requires feature branches</li>
- 	<li>Most places I've seen, feature branches do live on origin (unlike the original post)</li>
-</ul>
-<a href="https://guides.github.com/introduction/flow/index.html">GitHub flow</a> is so nearly right except for the last two steps are the wrong way round (Deploy then Merge!):
-<blockquote>Now that your changes have been verified in production, it is time to merge your code into the master branch.</blockquote>
-<b>This is my prefered workflow:</b>
-<ul>
- 	<li>Master is always trunk or head where all new development happens</li>
- 	<li>Every single check-in triggers a build (and tag with auto increment minor version) and is expected to be production code
-<ul>
- 	<li>If possible every build is automatically released but if not then a single click by an authorised user would make that release public</li>
-</ul>
-</li>
- 	<li>If old major versions are supported by team they are on branches (but the rest is the same, i.e every check is a release etc)</li>
- 	<li>Hot fixes are just another commit to either master or the branch. i.e nothing special</li>
- 	<li>Done means in production and you have monitored it with your own eyes! You don't start new work until you have seen your old work live</li>
- 	<li>If you are on the core team:
-<ul>
- 	<li>If you pair you can commit to master or branch directly</li>
- 	<li>If you solo you should get code review or pull request</li>
-</ul>
-</li>
- 	<li>If you are not on core team you pull request from your fork</li>
-</ul>
+After reading [Atlassian](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) worflow comparison and Vincent Driessen [original post](http://nvie.com/posts/a-successful-git-branching-model/) about GitFlow I have come to realise a couple of worrying things:
+
+- I incorrectly assumed GitFlow was the same thing as [GitHub flow](https://guides.github.com/introduction/flow/index.html) (fork project, do work then pull request)
+- This model appears to be popular but it seems totally archaic to me
+  
+  - Requires lots of merging especially if you refactor at lot.
+  - Doesn't do CD
+  - Requires lots of manual work
+  - Master and develop seem the wrong way around to me
+  - How many branches?
+- I use pull requests but don't use feature branches which the Atlassian article implies requires feature branches
+- Most places I've seen, feature branches do live on origin (unlike the original post)
+
+[GitHub flow](https://guides.github.com/introduction/flow/index.html) is so nearly right except for the last two steps are the wrong way round (Deploy then Merge!):
+
+> Now that your changes have been verified in production, it is time to merge your code into the master branch.
+
+**This is my prefered workflow:**
+
+- Master is always trunk or head where all new development happens
+- Every single check-in triggers a build (and tag with auto increment minor version) and is expected to be production code
+  
+  - If possible every build is automatically released but if not then a single click by an authorised user would make that release public
+- If old major versions are supported by team they are on branches (but the rest is the same, i.e every check is a release etc)
+- Hot fixes are just another commit to either master or the branch. i.e nothing special
+- Done means in production and you have monitored it with your own eyes! You don't start new work until you have seen your old work live
+- If you are on the core team:
+  
+  - If you pair you can commit to master or branch directly
+  - If you solo you should get code review or pull request
+- If you are not on core team you pull request from your fork
+
 Is it just me that thinks GitFlow doesn't look very "flow" based, more like a lot of manual busy work like the old days. Please report your counter experiences or alternate workflows...

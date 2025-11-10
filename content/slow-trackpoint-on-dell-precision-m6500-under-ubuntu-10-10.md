@@ -13,22 +13,30 @@ If you have a Dell Precision M6500 with a Synaptic TouchPad + TrackPoint) (rathe
 
 You can check this by typing:
 
-<pre>xinput list</pre>
+```
+xinput list
+```
 
 If you see something like this:
 
-<pre>
+```
+
 Virtual core pointer                    	id=2	[master pointer  (3)]
+
 ↳ Virtual core XTEST pointer              	id=4	[slave  pointer  (2)]
+
 ↳ SynPS/2 Synaptics TouchPad              	id=11	[slave  pointer  (2)]
+
 ↳ PS/2 Generic Mouse                      	id=12	[slave  pointer  (2)]
-</pre>
+
+```
 
 As you can see the TrackPoint is not listed and as such you wont see it in any of the configuration screens.
 
 As I haven't worked out how to get it to detect it as an actual TrackPoint the best solution I have is to change the acceleration mode to more closely represent what you would expect:
 
-<pre>xinput set-prop "PS/2 Generic Mouse" "Device Accel Profile" 6</pre>
+```
+xinput set-prop "PS/2 Generic Mouse" "Device Accel Profile" 6
+```
 
 I then just add this to the startup applications for my profile.
-

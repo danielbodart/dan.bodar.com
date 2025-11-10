@@ -10,53 +10,66 @@ comments:
 
 An alternative approach to just doing CSV export (which is fast and more cross platform/app) is to use web queries (.iqy files that point to fairly HTML) or data queries (.dqy extension but point to the DB)
 
-<b>Pro</b>
-<ul>
-<li>Supports refreshing data / live data model</li>
-<li>Web based integration</li>
-<li>Very easy to do</li>
-<li>Works with all versions since excel 97</li>
-<li>They support linking back into you app via urls (IQY only) so we had cells that said edit that took you back to the web app.</li>
-<li>Auto sorting, pivoting is a doddle</li>
-</ul>
+**Pro**
 
-<b>Cons</b>
-<ul>
-<li>No support for different sheets in the same book (you can work around this by having a master workbook that aggregates from multiple web queries sheets.) CSV has the same problem.</li>
-<li>There are some methods to write back but they all seemed a bit sucky to me (you can create forms that push the data back from specific cells but it's pretty ugle UI wise). I have always ended up writing a tiny bit of VBA that just does a POST to some url (embed this in your master workbook etc) or just an edit link that goes back to the web app</li>
-<li>Some annoying pop ups (See below)</li>
-</ul>
+- Supports refreshing data / live data model
+- Web based integration
+- Very easy to do
+- Works with all versions since excel 97
+- They support linking back into you app via urls (IQY only) so we had cells that said edit that took you back to the web app.
+- Auto sorting, pivoting is a doddle
 
-<b>Notes</b>
-<ul>
-<li>With DQY you expose username password and database details to user but you get full SQL support / joins etc.</li>
-<li>Make sure you set Cache-Control headers ( I use either "public" or "private, must-revalidate" )</li>
-</ul>
+**Cons**
 
-<b>IQY Example</b>
-<pre>
+- No support for different sheets in the same book (you can work around this by having a master workbook that aggregates from multiple web queries sheets.) CSV has the same problem.
+- There are some methods to write back but they all seemed a bit sucky to me (you can create forms that push the data back from specific cells but it's pretty ugle UI wise). I have always ended up writing a tiny bit of VBA that just does a POST to some url (embed this in your master workbook etc) or just an edit link that goes back to the web app
+- Some annoying pop ups (See below)
+
+**Notes**
+
+- With DQY you expose username password and database details to user but you get full SQL support / joins etc.
+- Make sure you set Cache-Control headers ( I use either "public" or "private, must-revalidate" )
+
+**IQY Example**
+
+```
+
 WEB
+
 1
+
 http://server/money.html?query=blah+blah+blah&sortBy=market_value
 
-</pre>
 
-<b>DQY Example</b>
-<pre>
+
+```
+
+**DQY Example**
+
+```
+
 XLODBC
+
 1
+
 DRIVER=SQL Server;SERVER=server\blah;UID=regulatory;PWD=l33t;DATABASE=showMeTheMoney
+
 SELECT * FROM trades ORDER BY market_value DESC 
 
-</pre>
 
-<b>Disable Excel Pop.reg</b>
-<pre>
+
+```
+
+**Disable Excel Pop.reg**
+
+```
+
 Windows Registry Editor Version 5.00
 
+
+
 [HKEY_CURRENT_USER\Software\Microsoft\Office\11.0\Excel\Options]
+
 "QuerySecurity"=dword:00000002
-</pre>
 
-
-
+```

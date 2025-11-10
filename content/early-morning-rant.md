@@ -11,4 +11,4 @@ comments:
 
 I've been an occasional user of Plaxo (just the address book) for the last 3 years, using it to keep a few important addresses up to date. Anyway today was the first time I had used it since they launched Pulse, and guess what all my contacts have gone!
 
-Now that's not very clever for a social networking site and reminds me what <a href="http://duncan-cragg.org/blog/">Duncan <span class="sub-banner">Cragg</span><span class="sub-sub-banner"></span></a> would say about Web 2.0 and making sure all you data is public, readable in some open format and ideally distributed over the interweb. If fact this really goes back to why "data bases" were created in the first place: data lives longer than applications: well not in Plaxo's case.
+Now that's not very clever for a social networking site and reminds me what [Duncan Cragg](http://duncan-cragg.org/blog/) would say about Web 2.0 and making sure all you data is public, readable in some open format and ideally distributed over the interweb. If fact this really goes back to why "data bases" were created in the first place: data lives longer than applications: well not in Plaxo's case.

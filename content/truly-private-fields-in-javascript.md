@@ -10,35 +10,35 @@ tags:
 
 So I was chatting with Christian Blunden about JavaScript, and he asked if it was possible to have private fields in JavaScript.
 
-Now the language doesn't have a key word but I knew that you could use function scoping to achieve the same affect as I had seen the same thing done using the <a href="http://www.erights.org/#2levels">E programming language</a>.
+Now the language doesn't have a key word but I knew that you could use function scoping to achieve the same affect as I had seen the same thing done using the [E programming language](http://www.erights.org/#2levels).
 
 So after 5 minutes here is what we came up with:
 
-[javascript]
-function Purse(money) {
-	this.getMoney = function() {
-		return money;
-	}
-	this.setMoney = function(newMoney) {
-		money = newMoney;
-	}
-}
-[/javascript]
+\[javascript]  
+function Purse(money) {  
+this.getMoney = function() {  
+return money;  
+}  
+this.setMoney = function(newMoney) {  
+money = newMoney;  
+}  
+}  
+\[/javascript]
 
 This will create a truely private field that can only be accessed via the methods.
 
 You can still mix your private getters and setters with prototype methods. eg:
 
-[javascript]
-Purse.prototype = {
-	add : function( money ) {
-		this.setMoney(this.getMoney() + money);
-	}
+\[javascript]  
+Purse.prototype = {  
+add : function( money ) {  
+this.setMoney(this.getMoney() + money);  
+}  
 }
 
-var p = new Purse(2);
-p.add( 1 );
-p.getMoney(); returns 3
-[/javascript]
+var p = new Purse(2);  
+p.add( 1 );  
+p.getMoney(); returns 3  
+\[/javascript]
 
 If you tried to access the money field directly it would be undefined.

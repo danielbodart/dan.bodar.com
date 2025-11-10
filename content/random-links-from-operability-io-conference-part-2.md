@@ -6,42 +6,38 @@ categories:
   - Uncategorized
 ---
 
-<a href="http://hardthings.bhorowitz.com/"/>The Hard Thing About Hard Things</a>
+[The Hard Thing About Hard Things](http://hardthings.bhorowitz.com/)  
 Have bought the book, looks very applicable to me at the moment.
 
-<a href="https://www.google.co.uk/search?q=war+games+simulation+worse+case+scenario">War Games - Simulate worse case scenario</a>
+[War Games - Simulate worse case scenario](https://www.google.co.uk/search?q=war%20games%20simulation%20worse%20case%20scenario)  
 Haven't found a good link for this with regards to IT
 
-<a href="https://en.wikipedia.org/wiki/Service_recovery_paradox">Service recovery paradox</a>
+[Service recovery paradox](https://en.wikipedia.org/wiki/Service_recovery_paradox)
 
-<strong>Logging Stuff</strong>
+**Logging Stuff**
 
-<a href="http://www.fluentd.org/">FluentD</a>
-<a href="https://www.loggly.com/">Loggly</a>
-<a href="https://logentries.com/">LogEntries</a>
-<a href="https://papertrailapp.com/">PaperTrail</a>
+[FluentD](http://www.fluentd.org/)  
+[Loggly](https://www.loggly.com/)  
+[LogEntries](https://logentries.com/)  
+[PaperTrail](https://papertrailapp.com/)
 
-<strong>Monitoring</strong>
-<a href="https://www.datadoghq.com/">DataDog</a>
-<a href="https://ruxit.com">Ruxit</a>
+**Monitoring**  
+[DataDog](https://www.datadoghq.com/)  
+[Ruxit](https://ruxit.com)
 
+[Evans Phoenix - Structured Logging](http://blog.current.sh/structured-logging-part-1-whats-the-big-deal/)
 
-<a href="http://blog.current.sh/structured-logging-part-1-whats-the-big-deal/">Evans Phoenix - Structured Logging</a>
+[Operational Features](http://blog.softwareoperability.com/2013/04/08/lets-talk-about-operational-features-not-non-functional-requirements/)
 
-<a href="http://blog.softwareoperability.com/2013/04/08/lets-talk-about-operational-features-not-non-functional-requirements/">Operational Features</a>
+**More Unikernel**  
+[Haskell Unikernel](https://github.com/GaloisInc/HaLVM)  
+[Rump Kernel](http://wiki.xenproject.org/wiki/Rump_kernel)
 
-<strong>More Unikernel</strong>
-<a href="https://github.com/GaloisInc/HaLVM">Haskell Unikernel</a>
-<a href="http://wiki.xenproject.org/wiki/Rump_kernel">Rump Kernel</a>
+**Security**  
+[Bug Crowd](https://bugcrowd.com/)  
+[Hacker One](https://hackerone.com/)
 
-<strong>Security</strong>
-<a href="https://bugcrowd.com/">Bug Crowd</a>
-<a href="https://hackerone.com/">Hacker One</a>
-
-<a hrf="https://github.com/docker/notary">Notary</a>
+[Notary]()  
 Sign those curl | sh installs
 
-<a href="https://grsecurity.net/">GRSecurity patches to Linux</a>
-
-
-
+[GRSecurity patches to Linux](https://grsecurity.net/)

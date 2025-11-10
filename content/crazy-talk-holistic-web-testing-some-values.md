@@ -11,13 +11,9 @@ categories:
 
 As the "crazy" guy behind the in-memory / out-of-container acceptance testing on a number of java/.net projects, I think it's important I explain to people the "Why" and the forces / constraints I am trying to balance. But first I want to quickly lay down my beliefs and values:
 
- <ul>
-	<li>I believe in testing as much as possible (UI included)</li>
-	<li>I believe tests must add more value than they cost (Measure it!)</li>
-	<li>I value tests that are fast and are resilient to change more than tests  that take a long time to run and are brittle.</li>
-	<li>When refactoring a feature I value acceptances tests and integration test over unit tests.</li>
-	<li>When designing/exploring a new interface / object interaction I value unit tests over acceptance tests to help guide me.</li>
-	<li>I believe that QA's are so much better at finding bugs than DEVs but worse at writing code / abstractions</li>
-
-</ul>
-
+- I believe in testing as much as possible (UI included)
+- I believe tests must add more value than they cost (Measure it!)
+- I value tests that are fast and are resilient to change more than tests that take a long time to run and are brittle.
+- When refactoring a feature I value acceptances tests and integration test over unit tests.
+- When designing/exploring a new interface / object interaction I value unit tests over acceptance tests to help guide me.
+- I believe that QA's are so much better at finding bugs than DEVs but worse at writing code / abstractions

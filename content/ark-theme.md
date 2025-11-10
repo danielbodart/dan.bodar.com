@@ -9,7 +9,8 @@ categories:
   - linux
 ---
 
-<pre><code># Install Arc soft fork
+```
+# Install Arc soft fork
 sudo add-apt-repository ppa:fossfreedom/arc-gtk-theme-daily
 sudo apt-get install arc-theme
 gsettings set org.gnome.desktop.interface gtk-theme 'Arc-Dark'
@@ -22,4 +23,4 @@ gsettings set org.gnome.desktop.interface gtk-theme 'Materia-dark-compact'
 sudo add-apt-repository ppa:daniruiz/flat-remix
 sudo apt-get install flat-remix
 gsettings set org.gnome.desktop.interface icon-theme 'Flat-Remix-Blue-Dark'
-</code></pre>
+```

@@ -9,6 +9,4 @@ tags:
   - &quot;Machine Learning&quot;
 ---
 
-<!-- wp:paragraph -->
-<p>PyCaret -> https://pycaret.org/</p>
-<!-- /wp:paragraph -->
+PyCaret -&gt; https://pycaret.org/

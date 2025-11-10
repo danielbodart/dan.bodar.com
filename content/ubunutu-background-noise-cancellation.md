@@ -6,8 +6,4 @@ categories:
   - Uncategorized
 ---
 
-<p><a href="https://github.com/josh-richardson/cadmus">https://github.com/josh-richardson/cadmus</a></p>
-
-<!-- wp:paragraph -->
-<p></p>
-<!-- /wp:paragraph -->
+[https://github.com/josh-richardson/cadmus](https://github.com/josh-richardson/cadmus)

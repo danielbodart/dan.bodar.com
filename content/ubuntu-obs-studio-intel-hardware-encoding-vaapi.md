@@ -11,39 +11,34 @@ tags:
   - hardware
 ---
 
-<p>So I had installed the latest version of OBS Studio (26.x) from the official channels but when I went to the output mode it only listed software encoding. In the logs it mentioned FFMPEG-VAAPI but wasn't using it as any recording was using 30%-50% CPU on a low powered laptop.</p>
-<p>In Settings -> Output change Outmode to Advanced (from Simple) then on Streaming -> Encoder change that to FFMPEG VAAPI (Recoding should just be set to use Streaming Encoder which is the default)<br /><br />But then when I tried to record it</p>
+So I had installed the latest version of OBS Studio (26.x) from the official channels but when I went to the output mode it only listed software encoding. In the logs it mentioned FFMPEG-VAAPI but wasn't using it as any recording was using 30%-50% CPU on a low powered laptop.
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>[FFMPEG VAAPI encoder] Failed to open VAAPI codec: Invalid argument</code></pre>
-<!-- /wp:code -->
+In Settings -&gt; Output change Outmode to Advanced (from Simple) then on Streaming -&gt; Encoder change that to FFMPEG VAAPI (Recoding should just be set to use Streaming Encoder which is the default)
 
-<!-- wp:paragraph -->
-<p> To fix this I then had to set an environment variable on start </p>
-<!-- /wp:paragraph -->
+But then when I tried to record it
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code> LIBVA_DRIVER_NAME=i965 obs</code></pre>
-<!-- /wp:code -->
+```
+[FFMPEG VAAPI encoder] Failed to open VAAPI codec: Invalid argument
+```
 
-<!-- wp:paragraph -->
-<p>To change the shortcut for OBS I did the following</p>
-<!-- /wp:paragraph -->
+To fix this I then had to set an environment variable on start
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>cp /usr/share/applications/com.obsproject.Studio.desktop ~/.local/share/applications/
+```
+ LIBVA_DRIVER_NAME=i965 obs
+```
 
-nano ~/.local/share/applications/com.obsproject.Studio.desktop</code></pre>
-<!-- /wp:code -->
+To change the shortcut for OBS I did the following
 
-<!-- wp:paragraph -->
-<p>Change the Exec line as follows</p>
-<!-- /wp:paragraph -->
+```
+cp /usr/share/applications/com.obsproject.Studio.desktop ~/.local/share/applications/
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>Exec=env LIBVA_DRIVER_NAME=i965 obs</code></pre>
-<!-- /wp:code -->
+nano ~/.local/share/applications/com.obsproject.Studio.desktop
+```
 
-<!-- wp:paragraph -->
-<p>Now recording only uses 5-10% CPU on the same laptop</p>
-<!-- /wp:paragraph -->
+Change the Exec line as follows
+
+```
+Exec=env LIBVA_DRIVER_NAME=i965 obs
+```
+
+Now recording only uses 5-10% CPU on the same laptop

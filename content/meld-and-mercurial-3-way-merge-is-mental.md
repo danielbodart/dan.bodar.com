@@ -10,10 +10,14 @@ comments:
   - {"author":"Aaron","email":"wright_left@yahoo.com","url":"","date":"2015-10-29T23:54:43Z","content":"Thanks for this. I wasted a lot of time merging stuff to the middle one, and got nothing out of it. /sigh","parent":0}
 ---
 
-By default <a href="http://meldmerge.org/">Meld's</a> 3 way merge combined with <a href="http://mercurial.selenic.com/">Mercurial</a> merges into the left panel. To make it merge into the middle panel add the following to .hgrc file
+By default [Meld's](http://meldmerge.org/) 3 way merge combined with [Mercurial](http://mercurial.selenic.com/) merges into the left panel. To make it merge into the middle panel add the following to .hgrc file
 
-<pre>
+```
+
 [merge-tools]
+
 meld.executable = meld
+
 meld.args = $local $base $other -o $output
-</pre>
+
+```

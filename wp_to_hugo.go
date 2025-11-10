@@ -15,6 +15,7 @@ import (
 	"time"
 
 	_ "github.com/go-sql-driver/mysql"
+	md "github.com/JohannesKaufmann/html-to-markdown/v2"
 )
 
 // Configuration
@@ -101,44 +102,63 @@ func copyFile(src, dst string) error {
 }
 
 func processContent(content string) string {
-	if wpSiteURL == "" || wpBackupDir == "" {
-		return content
+	// Remove WordPress block comments
+	wpCommentRe := regexp.MustCompile(`<!-- wp:[^>]+ -->`)
+	content = wpCommentRe.ReplaceAllString(content, "")
+
+	// Remove closing WordPress comments
+	content = strings.ReplaceAll(content, "<!-- /wp:paragraph -->", "")
+	content = strings.ReplaceAll(content, "<!-- /wp:code -->", "")
+	content = strings.ReplaceAll(content, "<!-- /wp:list -->", "")
+	content = strings.ReplaceAll(content, "<!-- /wp:heading -->", "")
+
+	// Convert line breaks to <br> so the HTML-to-Markdown converter preserves them
+	content = strings.ReplaceAll(content, "\n", "<br>")
+
+	// Convert HTML to Markdown
+	markdown, err := md.ConvertString(content)
+	if err != nil {
+		log.Printf("Warning: could not convert HTML to markdown: %v", err)
+		markdown = content
 	}
 
-	// Find all wp-content/uploads references
-	re := regexp.MustCompile(regexp.QuoteMeta(wpSiteURL) + `/wp-content/uploads/([^"'\s<>]+)`)
+	// Process image/attachment URLs and copy files
+	if wpSiteURL != "" && wpBackupDir != "" {
+		re := regexp.MustCompile(regexp.QuoteMeta(wpSiteURL) + `/wp-content/uploads/([^"'\s<>)]+)`)
+		markdown = re.ReplaceAllStringFunc(markdown, func(match string) string {
+			// Extract the path after /uploads/
+			parts := strings.SplitN(match, "/wp-content/uploads/", 2)
+			if len(parts) != 2 {
+				return match
+			}
 
-	return re.ReplaceAllStringFunc(content, func(match string) string {
-		// Extract the path after /uploads/
-		parts := strings.SplitN(match, "/wp-content/uploads/", 2)
-		if len(parts) != 2 {
-			return match
-		}
+			uploadPath := parts[1]
+			srcFile := filepath.Join(wpBackupDir, "html/wp-content/uploads", uploadPath)
 
-		uploadPath := parts[1]
-		srcFile := filepath.Join(wpBackupDir, "html/wp-content/uploads", uploadPath)
+			// Determine destination based on file extension
+			ext := strings.ToLower(filepath.Ext(uploadPath))
+			var dstFile string
+			var newURL string
 
-		// Determine destination based on file extension
-		ext := strings.ToLower(filepath.Ext(uploadPath))
-		var dstFile string
-		var newURL string
+			if ext == ".zip" || ext == ".pdf" || ext == ".tar" || ext == ".gz" {
+				dstFile = filepath.Join(hugoStaticDir, "downloads", filepath.Base(uploadPath))
+				newURL = "/downloads/" + filepath.Base(uploadPath)
+			} else {
+				dstFile = filepath.Join(hugoStaticDir, "images", filepath.Base(uploadPath))
+				newURL = "/images/" + filepath.Base(uploadPath)
+			}
 
-		if ext == ".zip" || ext == ".pdf" || ext == ".tar" || ext == ".gz" {
-			dstFile = filepath.Join(hugoStaticDir, "downloads", filepath.Base(uploadPath))
-			newURL = "/downloads/" + filepath.Base(uploadPath)
-		} else {
-			dstFile = filepath.Join(hugoStaticDir, "images", filepath.Base(uploadPath))
-			newURL = "/images/" + filepath.Base(uploadPath)
-		}
+			// Copy the file
+			if err := copyFile(srcFile, dstFile); err != nil {
+				log.Printf("Warning: could not copy %s: %v", srcFile, err)
+				return match
+			}
 
-		// Copy the file
-		if err := copyFile(srcFile, dstFile); err != nil {
-			log.Printf("Warning: could not copy %s: %v", srcFile, err)
-			return match
-		}
+			return newURL
+		})
+	}
 
-		return newURL
-	})
+	return markdown
 }
 
 func getAllTaxonomies(db *sql.DB) (map[int64][]string, map[int64][]string, error) {
@@ -265,8 +285,8 @@ func createHugoPost(post PostData, categories, tags []string, comments []Comment
 
 	content.WriteString("---\n\n")
 
-	// Process content to copy images and rewrite URLs
-	processedContent := processContent(cleanHTML(post.Content))
+	// Process content: convert to markdown, remove WP comments, copy images, rewrite URLs
+	processedContent := processContent(post.Content)
 	content.WriteString(processedContent)
 
 	return content.String()

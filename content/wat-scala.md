@@ -18,40 +18,32 @@ comments:
   - {"author":"Steven Shaw","email":"steven@steshaw.org","url":"http://steshaw.org/","date":"2015-06-19T11:58:56Z","content":"Seems you only need -deprecation to avoid the issue. Even without the -deprecation, you get a warning which is nice.\r\n\r\nThe 1-star blog you point to is a ridiculous rant from someone who used Scala for a couple of weeks and wasn't taken by the syntax use or use of types. Obviously coming from a Ruby or JS type of background.\r\n\r\nHow about yourself, what programming languages are you into at the moment?","parent":0}
 ---
 
-As I got quoted recently in <a href="http://overwatering.org/blog/2013/12/scala-1-star-would-not-program-again/">"Scala — 1★ Would Not Program Again"</a> I though I finally should write up a little <a href="https://www.destroyallsoftware.com/talks/wat">Wat</a> moment we had recently:
+As I got quoted recently in ["Scala — 1★ Would Not Program Again"](http://overwatering.org/blog/2013/12/scala-1-star-would-not-program-again/) I though I finally should write up a little [Wat](https://www.destroyallsoftware.com/talks/wat) moment we had recently:
 
 So does anyone know "wat" the following Scala code returns? (Value and Type)
 
-<pre>
-List(1,2,3).toSet()
-</pre>
+```
 
-A Set<Int> containing 1,2,3?
+List(1,2,3).toSet()
+
+```
+
+A Set&lt;Int&gt; containing 1,2,3?
 
 Nope how about I give you a clue, there are 2 bugs in this one line:
-<ol>
-	<li>A type inferencing bug where it chooses Set<Any></li>
-	<li>A bug where the brackets are used for both calling the Set.apply method and constructing Unit, notice there no space between the "toSet" and "()"</li>
-</ol>
+
+1. A type inferencing bug where it chooses Set&lt;Any&gt;
+2. A bug where the brackets are used for both calling the Set.apply method and constructing Unit, notice there no space between the "toSet" and "()"
 
 Yup you guessed it, it returns:
 
-<pre>false</pre>
+```
+false
+```
 
 Wat? Try it in your repl and for even more fun check the bytecode out.
 
-<strong>UPDATE: </strong>
+**UPDATE:**  
 Looks like ("-Yno-adapted-args", "Do not adapt an argument list (either by inserting () or creating a tuple) to match the receiver.") is your friend
 
-Pete Kneller has done some <a href="https://gist.github.com/petekneller/7803974">really good analysis</a> so you can see all the different weird combinations
-
-
-
-
-
-
-
-
-
-
-
+Pete Kneller has done some [really good analysis](https://gist.github.com/petekneller/7803974) so you can see all the different weird combinations

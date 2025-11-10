@@ -6,6 +6,6 @@ categories:
   - Uncategorized
 ---
 
-<a href="https://hub.docker.com/add/automated-build/github/">https://hub.docker.com/add/automated-build/github/</a>
+[https://hub.docker.com/add/automated-build/github/](https://hub.docker.com/add/automated-build/github/)
 
 Just because it's hard to find and seem to break all the time in their docs!

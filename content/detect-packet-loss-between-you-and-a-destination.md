@@ -6,4 +6,6 @@ categories:
   - Uncategorized
 ---
 
-<pre></code>mtr bodar.com</code></pre>
+```
+mtr bodar.com
+```

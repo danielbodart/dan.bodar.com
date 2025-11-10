@@ -11,10 +11,13 @@ comments:
 ---
 
 I only just found out about this...
-<pre><code># Send data via TCP to host 127.0.0.1 port 12201
+
+```
+# Send data via TCP to host 127.0.0.1 port 12201
 echo "hello" >/dev/tcp/127.0.0.1/12201
 
 # Send data via UDP to host 127.0.0.1 port 12201
 echo "hello" >/dev/udp/127.0.0.1/12201
-</code></pre>
+```
+
 Now is there a way to listen via the same /dev/tcp|udp end point?

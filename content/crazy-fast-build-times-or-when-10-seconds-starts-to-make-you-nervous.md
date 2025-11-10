@@ -41,36 +41,36 @@ comments:
   - {"author":"\u0026#8220;Why are my tests so slow?\u0026#8221; A list of likely suspects, anti-patterns, and unresolved personal trauma. \u0026#8211; charity.wtf","email":"","url":"https://charity.wtf/2020/12/31/why-are-my-tests-so-slow-a-list-of-likely-suspects-anti-patterns-and-unresolved-personal-trauma/","date":"2021-04-30T05:47:32Z","content":"[…] P.S. this blog post is the best thing i’ve ever read about reducing your build time. EVER. […]","parent":0}
 ---
 
-Firstly this is not just my effort but my team and organisation.
-Secondly the usual rules apply, this is expert advise and what works for me will very probably cause your whole production stack to blow up and kill people.
-Lastly this is long so skip to the bit you care about or come along and chat at <a title="QCon London 2012" href="http://qconlondon.com/london-2012/presentation/Crazy%20Talk:%20When%2010%20second%20builds%20start%20to%20make%20you%20nervous">QCon London 2012</a>
+Firstly this is not just my effort but my team and organisation.  
+Secondly the usual rules apply, this is expert advise and what works for me will very probably cause your whole production stack to blow up and kill people.  
+Lastly this is long so skip to the bit you care about or come along and chat at [QCon London 2012](http://qconlondon.com/london-2012/presentation/Crazy%20Talk:%20When%2010%20second%20builds%20start%20to%20make%20you%20nervous "QCon London 2012")
 
-Well lets answer the obvious questions:
-<strong>"Can this work for real apps or just fun stuff?"</strong> Yes real apps old and new.
-<strong>"Does it need to be greenfield?"</strong> No but it takes a long time (months) to get builds down on old codebases.
+Well lets answer the obvious questions:  
+**"Can this work for real apps or just fun stuff?"** Yes real apps old and new.  
+**"Does it need to be greenfield?"** No but it takes a long time (months) to get builds down on old codebases.
 
 Lets have some examples then (greenfield means it was built with speed in mind)
-<ol>
- 	<li>5+ year legacy app, down from <strong>45 mins to 3+ minutes</strong> (this is the one we are focusing on at the moment - probably taken a year on and off to get this far) .</li>
- 	<li>3+ year legacy app, down from <strong>20 mins to 3+ minutes</strong> (this took a couple of months)</li>
- 	<li>1+ year greenfield app, creeping <strong>up to 12 seconds</strong></li>
- 	<li>6 month greenfield app/lib (used by number 1), creeping <strong>up to 15 seconds</strong> (warning lights are going off here)</li>
- 	<li>2 year greenfield library (used by 1,2,3,4), <strong>down to 8 seconds</strong> having peeked at 15 seconds</li>
-</ol>
+
+1. 5+ year legacy app, down from **45 mins to 3+ minutes** (this is the one we are focusing on at the moment - probably taken a year on and off to get this far) .
+2. 3+ year legacy app, down from **20 mins to 3+ minutes** (this took a couple of months)
+3. 1+ year greenfield app, creeping **up to 12 seconds**
+4. 6 month greenfield app/lib (used by number 1), creeping **up to 15 seconds** (warning lights are going off here)
+5. 2 year greenfield library (used by 1,2,3,4), **down to 8 seconds** having peeked at 15 seconds
+
 Here are my rules of engagement:
-<ol>
- 	<li>Nothing is safe: build tool, compiler, testing library, language, web container, messaging library, persistence layer, architecture, OS, code layout, team and process.</li>
- 	<li>Making you app / build fast is just like making your code testable, it will make you and your app better.</li>
- 	<li>Following from 2: Don't split up you tests into slow and fast, split up you app into other apps or libs. Splitting the tests is just ignoring the problem plus people will just stop looking at the slow test.</li>
- 	<li>Crazy is good</li>
-</ol>
-<strong>Build tool:</strong>
 
-If you are using <strong>Maven</strong> (the binary) then you have no hope of ever being in the sub 10 seconds cool club but even if you are in a maven organisation you can use the maven structure and produce maven artifacts with your build but use a different tool (Make, sbt, buildr, ant etc). Think <em>maven is an output contract not an implementation contract.</em> You would have thought that maven and ivy would actually be fast at downloading libs as they tend to download the internet all the time but in fact they are incredible slow (they download sequentially which just blows my mind - this is part due to the stupid transitive nature of those tools).
+1. Nothing is safe: build tool, compiler, testing library, language, web container, messaging library, persistence layer, architecture, OS, code layout, team and process.
+2. Making you app / build fast is just like making your code testable, it will make you and your app better.
+3. Following from 2: Don't split up you tests into slow and fast, split up you app into other apps or libs. Splitting the tests is just ignoring the problem plus people will just stop looking at the slow test.
+4. Crazy is good
 
-<strong>Compiling: </strong>
+**Build tool:**
 
-Incremental or Clean? I truly wish incremental actually worked well, <strong>Make</strong> does a great job with production code but it just can't have the insight to understand the relationship between production and test code. The second problem with incremental is that I'm always going to do a clean on CI which tends to mean incremental is only good for incremental non-pushing local builds. As I tend to push on most commits it's little value to me. Finally incremental using javac (without Make doing the smarts) is actually slower that doing a clean compile (and jar) (i think mainly due to the the fact it checks each file and class to see if it's exists and changed while in clean mode it only checks to see if the file exists - I hoping to fix this soon)
+If you are using **Maven** (the binary) then you have no hope of ever being in the sub 10 seconds cool club but even if you are in a maven organisation you can use the maven structure and produce maven artifacts with your build but use a different tool (Make, sbt, buildr, ant etc). Think *maven is an output contract not an implementation contract.* You would have thought that maven and ivy would actually be fast at downloading libs as they tend to download the internet all the time but in fact they are incredible slow (they download sequentially which just blows my mind - this is part due to the stupid transitive nature of those tools).
+
+**Compiling:**
+
+Incremental or Clean? I truly wish incremental actually worked well, **Make** does a great job with production code but it just can't have the insight to understand the relationship between production and test code. The second problem with incremental is that I'm always going to do a clean on CI which tends to mean incremental is only good for incremental non-pushing local builds. As I tend to push on most commits it's little value to me. Finally incremental using javac (without Make doing the smarts) is actually slower that doing a clean compile (and jar) (i think mainly due to the the fact it checks each file and class to see if it's exists and changed while in clean mode it only checks to see if the file exists - I hoping to fix this soon)
 
 So I use clean.
 
@@ -78,53 +78,53 @@ This leads me to the actual compiler. If the compiling is slow (hey Scala (see f
 
 Pro tip: Always compile and jar in one step: This will actually speed up you build on a number of fronts, by putting it in a jar when you compile your tests it will load the jar into memory so no more disk IO: instead of lots of tiny random reads, just one nice big fat read for the zip. Do the same for your test jar and your tests will load and run quicker as well. I have timed this a number of times on projects and clean, compiler + jar and test is faster than incremental (with javac) compile and test loose files. Try it and see. (NB Large projects this might not hold but that's another problem)
 
-<strong>Testing:</strong>
+**Testing:**
 
 Stop using crappy testing tools that need parse some text and don't support refactoring. This will kill your build on two fronts:
-<ol>
- 	<li>Parsing say Html and invoking Java/C# etc is going to be slow as hell in the short term.</li>
- 	<li>Because you can't refactor the tests they are going to become a big noose around your neck long term. I'm talking to you<strong> Fit, Fitness, Concordion</strong> ...</li>
-</ol>
-Stop using slow acceptance testing tools like <strong>Selenium</strong>, not only are they incredible slow but they are incredibly high maintenance for very little return on investment. (To be fair to Selenium I believe you can run WebDriver with HtmlUnit directly off an InputStream)
+
+1. Parsing say Html and invoking Java/C# etc is going to be slow as hell in the short term.
+2. Because you can't refactor the tests they are going to become a big noose around your neck long term. I'm talking to you **Fit, Fitness, Concordion** ...
+
+Stop using slow acceptance testing tools like **Selenium**, not only are they incredible slow but they are incredibly high maintenance for very little return on investment. (To be fair to Selenium I believe you can run WebDriver with HtmlUnit directly off an InputStream)  
 UPDATE: Selenium has an in process project that looks very promising https://github.com/aharin/inproctester
 
 Instead use an in-memory (no TCP/HTTP) web testing tools. A lot of trendy web frameworks have support and if yours doesn't then maybe it's time to look for one that does. If you can't convert a String to Request and back again then you are probably not using a web framework that is well written or well tested, let alone fast.
 
-If you have some production constraint that is slow (say Oracle) then separate the oracle integration tests out from your acceptance tests. I create fast production quality implementations (in memory, local disk, h2, hsql, lucene etc) that for-fill the same contract. And by this I mean I have either an abstract contract test that all implementations inherit or parametrise the test that takes a list of implementations. For more confidence you can have your CI run with Oracle and local run with H2, I normally see a <strong>factor of 3-4x faster</strong> with this setup. I prefer to just use in memory collection backed version as this can give you a <strong>factor up to 10x</strong> speed up. People always bitch about not using the exact production stack (blah blah blah) but I seem to be one of the few people actually measuring the cost/benifit.
+If you have some production constraint that is slow (say Oracle) then separate the oracle integration tests out from your acceptance tests. I create fast production quality implementations (in memory, local disk, h2, hsql, lucene etc) that for-fill the same contract. And by this I mean I have either an abstract contract test that all implementations inherit or parametrise the test that takes a list of implementations. For more confidence you can have your CI run with Oracle and local run with H2, I normally see a **factor of 3-4x faster** with this setup. I prefer to just use in memory collection backed version as this can give you a **factor up to 10x** speed up. People always bitch about not using the exact production stack (blah blah blah) but I seem to be one of the few people actually measuring the cost/benifit.
 
 Some fuzzy facts: On e4 (ramped up to 2 teams with maybe 20+ devs in total) we used the hsql local and oracle on CI setup. Build contained maybe 2000 tests (I don't separate acceptance, unit etc) Local build was 56 seconds on Ubuntu, 1 minute 30 on windows (same hardware), CI was 3 mins 30 ish. We had one production oracle issue caused by the difference between oracle and hsql (empty string == null in oracle) as most where caught at CI. The bug took us max one day to fix and release but I took some heat for it from the devs but I pulled out the calculator. We had been running for 3 months, we had 12 pairs doing 10+ builds a day each, so that's about 5 man hours a day or about 20 man days over the 3 months. So 1 day cost for 20 days saved, OK there was some reputation risk but I think hard to measure stuff like attitude and mean time to repair (when you don't have a second team doing the same storry with full stack build) was even better. Graham Brooks did a great presentation for this for one of the Agile conference.
 
-<strong>Language / Libraries / Web Containers etc</strong>
+**Language / Libraries / Web Containers etc**
 
 If it's slow ditch it.
 
-Yup I ditched <strong>Scala</strong> because of it's terrible compile time. I actually re-wrote a couple of libraries/apps so I have side by side with the exact same code in one language and another. It's scary without incremental compile (sbt) or long running processes (fast compiler) the raw scala compiler is 10x slower than <strong>Java</strong>. 10x!!! That's just insane. With incremental it's the same a full clean Java compile. Not only is scala slow to compile but the byte code is 2x as big as Java for the same functionality, That must translate into a performance hit. 
+Yup I ditched **Scala** because of it's terrible compile time. I actually re-wrote a couple of libraries/apps so I have side by side with the exact same code in one language and another. It's scary without incremental compile (sbt) or long running processes (fast compiler) the raw scala compiler is 10x slower than **Java**. 10x!!! That's just insane. With incremental it's the same a full clean Java compile. Not only is scala slow to compile but the byte code is 2x as big as Java for the same functionality, That must translate into a performance hit. 
 
-UPDATE: For byte code size please compare <a href="http://code.google.com/p/yadic/downloads/list?can=2&q=scala&colspec=Filename+Summary+Uploaded+ReleaseDate+Size+DownloadCount">yadic-67.jar (last scala version) and yadic-68.jar (exact same functionality in java)</a>
+UPDATE: For byte code size please compare [yadic-67.jar (last scala version) and yadic-68.jar (exact same functionality in java)](http://code.google.com/p/yadic/downloads/list?can=2&q=scala&colspec=Filename%20Summary%20Uploaded%20ReleaseDate%20Size%20DownloadCount)
 
 It's not just scala mind:
 
-<strong>Lucene</strong> is going the same way, between version 3.3 and 3.4, if you don't create create a singleton for the IndexWriters and Readers it's 30x slower to instantiate. 30x!!! FFS. Now I give you that in production you don't create a new index 30 times in a second but for testing it's a nightmare. At the same time Lucene is so much faster than going across the wire to a remote DB for obvious reasons.
+**Lucene** is going the same way, between version 3.3 and 3.4, if you don't create create a singleton for the IndexWriters and Readers it's 30x slower to instantiate. 30x!!! FFS. Now I give you that in production you don't create a new index 30 times in a second but for testing it's a nightmare. At the same time Lucene is so much faster than going across the wire to a remote DB for obvious reasons.
 
-<strong>Hibernate Session Factory</strong> can take seconds to start up, WTF you are just readying some XML or annotations. So either ditch hibernate or remove it from your acceptance tests (in-memory FTW).
+**Hibernate Session Factory** can take seconds to start up, WTF you are just readying some XML or annotations. So either ditch hibernate or remove it from your acceptance tests (in-memory FTW).  
 UPDATE: Hibernate seems to take about 1.3 seconds to instantiate the SessionFactory class even with less than 200 line of HBM file.
 
-<strong>Velocity</strong> is the same, if you don't use their singleton it can takes seconds to start.
+**Velocity** is the same, if you don't use their singleton it can takes seconds to start.  
 UPDATE: I've done some more testing and Velocity does appear to be a little better these days (100ms to start). Not great but not terrible either
 
-<strong>Tomcat / Jetty</strong> take seconds to start, okay you can run Jetty in embedded with helps a lot but nothing, yes nothing is a fast as the the <a href="http://docs.oracle.com/javase/6/docs/jre/api/net/httpserver/spec/com/sun/net/httpserver/package-summary.html" target="_blank">embedded Java 6 HTTP server</a>, 10ms cold JVM, <1ms warm.
+**Tomcat / Jetty** take seconds to start, okay you can run Jetty in embedded with helps a lot but nothing, yes nothing is a fast as the the [embedded Java 6 HTTP server](http://docs.oracle.com/javase/6/docs/jre/api/net/httpserver/spec/com/sun/net/httpserver/package-summary.html), 10ms cold JVM, &lt;1ms warm.
 
-<strong>GWT</strong> is a big time sync on multiple fronts:
-<ol>
- 	<li>The compile step is slow.</li>
- 	<li>Because you now have so much generated Javascript you feel you have to use tools like Selenium to acceptance test it.</li>
- 	<li>You will have so much more Java code than you really need...</li>
-</ol>
+**GWT** is a big time sync on multiple fronts:
+
+1. The compile step is slow.
+2. Because you now have so much generated Javascript you feel you have to use tools like Selenium to acceptance test it.
+3. You will have so much more Java code than you really need...
+
 Again I have numbers: Application number 2 we ripped out GWT and replaced it with some crappy MVC setup: compile time reduced by 30 seconds, acceptance testing reduced by nearly 20 minutes as we no longer needed to use IE Selenium driver. Java Code reduced by 82%,
 
 Spring lets just leave it at that. UPDATE: 5+ year old project: Using Xml config takes 14 seconds to start (This can be reduced by using the lazy attribute). 1 year old project using annotations takes 1.3 seconds to start.
 
-<strong>OS / Hardware</strong>
+**OS / Hardware**
 
 Windows disk IO is just poor, for builds it's a killer. As I said before we saw a 50% increase in time using Windows (comapred to Ubuntu) with exactly the same hardware, code.
 
@@ -132,7 +132,7 @@ MacOS is faster than Windows for sure but Linux is fastest. We have dual boot w
 
 SSD / RAM DISK: I don't have exact numbers but saw around 10% decrease in time on my laptop with a new SSD.
 
-<strong>Divide and Conquer  / Architecture</strong>
+**Divide and Conquer  / Architecture**
 
 As I said before don't split you test code, split your whole project. We have extracted libraries and applications from our legacy applications. What's great is we actually need less slow acceptance tests because the library is more focussed and tests at the API level. While the app only needs to test that the default config works. These really helps counter another common anti-pattern I see is that people want to retest every thing at the acceptance level.
 
@@ -140,22 +140,21 @@ If you force logic into a library then an acceptance test is actually an API tes
 
 I think that's most of it dumped.
 
-<strong>*Notes*</strong>
+**\*Notes\***
 
 Some compile times for 8.5K loc project rewriten from Scala to Java
 
-<strong>Scala</strong>
-<ul>
- 	<li>ant clean compile test package: 30 seconds</li>
- 	<li>sbt clean compile test package: 56 seconds</li>
- 	<li>sbt incremental compile test package: 6 seconds</li>
- 	<li>buildr (clean compile test package): 37 seconds</li>
- 	<li>maven2 clean verify: 42 seconds</li>
-</ul>
-<strong>Java</strong>
-<ul>
- 	<li>ant clean compile test package: 6.9~ seconds</li>
- 	<li>make clean compile test package: 6.7~ seconds</li>
- 	<li>make incremental compile test package: 6.4 seconds (changing one prod file and one test file)</li>
- 	<li>make incremental compile test package: 3.8 seconds (changing one test file only)</li>
-</ul>
+**Scala**
+
+- ant clean compile test package: 30 seconds
+- sbt clean compile test package: 56 seconds
+- sbt incremental compile test package: 6 seconds
+- buildr (clean compile test package): 37 seconds
+- maven2 clean verify: 42 seconds
+
+**Java**
+
+- ant clean compile test package: 6.9~ seconds
+- make clean compile test package: 6.7~ seconds
+- make incremental compile test package: 6.4 seconds (changing one prod file and one test file)
+- make incremental compile test package: 3.8 seconds (changing one test file only)

@@ -6,8 +6,4 @@ categories:
   - Uncategorized
 ---
 
-<p><a href="_wp_link_placeholder" data-wplink-edit="true">https://openswitcher.org/</a></p>
-
-<!-- wp:paragraph -->
-<p></p>
-<!-- /wp:paragraph -->
+[https://openswitcher.org/](_wp_link_placeholder)

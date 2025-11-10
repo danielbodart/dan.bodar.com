@@ -8,18 +8,28 @@ comments:
   - {"author":"Joshua Gies","email":"jsgies@gmail.com","url":"","date":"2017-12-03T18:28:29Z","content":"Thanks a bunch! This is the same error I was facing, and your fix worked for me as well.","parent":0}
 ---
 
-I had dowloaded <a href="http://smarden.org/runit/runit-2.1.1.tar.gz">RunIt</a>. Then ran 
+I had dowloaded [RunIt](http://smarden.org/runit/runit-2.1.1.tar.gz). Then ran
 
-<pre>package/compile</pre>
+```
+package/compile
+```
 
 It errored with:
 
-<pre>./compile runit.c
+```
+./compile runit.c
+
 ./load runit unix.a byte.a -static
+
 /usr/bin/ld: cannot find -lc
+
 collect2: error: ld returned 1 exit status
-make: *** [runit] Error 1</pre>
+
+make: *** [runit] Error 1
+```
 
 To fix I needed to run
 
-<pre>sudo yum install glibc-static</pre>
+```
+sudo yum install glibc-static
+```

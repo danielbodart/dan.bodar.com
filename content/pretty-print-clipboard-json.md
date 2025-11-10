@@ -6,4 +6,6 @@ categories:
   - Uncategorized
 ---
 
-<pre><code>alias json='xclip -o | jq -C "." | less -r'</code></pre>
+```
+alias json='xclip -o | jq -C "." | less -r'
+```

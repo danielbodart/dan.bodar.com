@@ -15,31 +15,16 @@ So the wifi seemed to work pretty well out of the box but I noticed after prolon
 
 You can tell if this will be a problem for you by running iwconfig: if you have lots of Invalid misc errors and the signal and noise levels are fixed at -60dBm then you will want to switch from the ipw3945 module to the iwl3945.
 
-To try it out:
-<code>
-sudo modprobe -r ipw3945
-sudo modprobe -r ieee80211
-sudo modprobe -r ieee80211_crypt
-sudo modprobe -r mac80211
-sudo modprobe iwlwifi_mac80211
-sudo modprobe iwl3945
-</code>
+To try it out:  
+`sudo modprobe -r ipw3945 sudo modprobe -r ieee80211 sudo modprobe -r ieee80211_crypt sudo modprobe -r mac80211 sudo modprobe iwlwifi_mac80211 sudo modprobe iwl3945`
 
-Now if you run iwconfig you should see wlan0 (plus <a href="http://linuxwireless.org/en/developers/Documentation/mac80211#Themasterdevicewmaster0">wmaster0</a> which we'll just ignore). If it's called wlan0_rename then you run
-<code>
-sudo nano /etc/udev/rules.d/70-persistent-net.rules
-</code>
+Now if you run iwconfig you should see wlan0 (plus [wmaster0](http://linuxwireless.org/en/developers/Documentation/mac80211#Themasterdevicewmaster0) which we'll just ignore). If it's called wlan0\_rename then you run  
+`sudo nano /etc/udev/rules.d/70-persistent-net.rules`  
 Comment out the line reserving eth1 for ipw3945 module.
 
-To make this all permanent you need to add the iwl3945 and iwlwifi_mac80211 modules to /etc/modules
+To make this all permanent you need to add the iwl3945 and iwlwifi\_mac80211 modules to /etc/modules
 
-<code>sudo echo iwlwifi_mac80211 >> /etc/modules
-sudo echo iwl3945 >> /etc/modules
-</code>
+`sudo echo iwlwifi_mac80211 >> /etc/modules sudo echo iwl3945 >> /etc/modules`
 
-And now stop the ipw3945 and dependencies from loading by blacklisting them
-<code>
-sudo echo blacklist ipw3945 >> /etc/modprobe.d/blacklist
-sudo echo blacklist ieee80211 >> /etc/modprobe.d/blacklist
-sudo echo blacklist ieee80211_crypt >> /etc/modprobe.d/blacklist
-sudo echo blacklist mac80211 >> /etc/modprobe.d/blacklist</code>
+And now stop the ipw3945 and dependencies from loading by blacklisting them  
+`sudo echo blacklist ipw3945 >> /etc/modprobe.d/blacklist sudo echo blacklist ieee80211 >> /etc/modprobe.d/blacklist sudo echo blacklist ieee80211_crypt >> /etc/modprobe.d/blacklist sudo echo blacklist mac80211 >> /etc/modprobe.d/blacklist`

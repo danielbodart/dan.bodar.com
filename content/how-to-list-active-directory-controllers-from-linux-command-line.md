@@ -7,6 +7,8 @@ categories:
   - windows
 ---
 
-<pre>
+```
+
 nslookup -type=srv _ldap._tcp.dc._msdcs.YOUR.DOMAIN.COM
-</pre>
+
+```

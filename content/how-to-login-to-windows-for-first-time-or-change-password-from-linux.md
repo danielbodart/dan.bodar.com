@@ -7,8 +7,10 @@ categories:
   - windows
 ---
 
-<pre>
+```
+
 smbpasswd -r YOUR.DOMAIN.COM -U YOUR_USERNAME
-</pre>
+
+```
 
 This will mean you don't need to find a windows box every time your password expires if you only use say Outlook webmail in a windows environment.

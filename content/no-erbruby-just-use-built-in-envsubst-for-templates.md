@@ -7,11 +7,17 @@ categories:
 ---
 
 template.txt contains:
-<pre><code>Hello ${NAME}</code></pre>
+
+```
+Hello ${NAME}
+```
 
 Then you could run:
 
-<pre><code>export NAME=Dan
-envsubst < template.txt</code></pre>
+```
+export NAME=Dan
+
+envsubst < template.txt
+```
 
 And the result would be "Hello Dan"

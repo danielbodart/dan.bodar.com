@@ -8,8 +8,12 @@ categories:
 
 Assuming you used Chrome and a modern Linux file system...
 
-<pre>
+```
+
 $ attr -g xdg.origin.url Downloads/google-chrome-stable_current_x86_64.rpm 
+
 Attribute "xdg.origin.url" had a 74 byte value for /home/dan/Downloads/google-chrome-stable_current_x86_64.rpm:
+
 https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
-</pre>
+
+```

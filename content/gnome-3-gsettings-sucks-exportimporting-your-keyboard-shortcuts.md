@@ -17,12 +17,22 @@ Previous to Gnome 3 I had a nice simple flat file for my keyboard settings, that
 Locate the keyboard shortcut schema "org.gnome.desktop.wm.keybindings"
 
 Now lets "export" them
-<pre>gsettings list-recursively org.gnome.desktop.wm.keybindings > keybindings</pre>
 
-Now unfortunately there does not appear to be a way to import that file, so I just hacked the file. Adding "gsettings set" to the front and quoting the values.
+```
+gsettings list-recursively org.gnome.desktop.wm.keybindings > keybindings
+```
+
+Now unfortunately there does not appear to be a way to import that file, so I just hacked the file. Adding "gsettings set" to the front and quoting the values.  
 So
-<pre>org.gnome.desktop.wm.keybindings show-desktop ['<Super>d', '<Primary><Super>d', '<Super>d']</pre>
-becomes
-<pre>gsettings set org.gnome.desktop.wm.keybindings show-desktop "['<Super>d', '<Primary><Super>d', '<Super>d']"</pre>
 
-I've created <a href="/downloads/keybindings.zip">some keybindins</a> that use the Windows/Super key for window management, plus this don't conflict with IntellJ
+```
+org.gnome.desktop.wm.keybindings show-desktop ['<Super>d', '<Primary><Super>d', '<Super>d']
+```
+
+becomes
+
+```
+gsettings set org.gnome.desktop.wm.keybindings show-desktop "['<Super>d', '<Primary><Super>d', '<Super>d']"
+```
+
+I've created [some keybindins](/downloads/keybindings.zip) that use the Windows/Super key for window management, plus this don't conflict with IntellJ

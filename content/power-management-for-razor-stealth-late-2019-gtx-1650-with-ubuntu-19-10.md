@@ -10,20 +10,16 @@ tags:
   - Razor
 ---
 
-<!-- wp:paragraph -->
-<p>First install <a href="https://01.org/powertop">powertop</a> and <a href="https://linrunner.de/en/tlp/docs/tlp-linux-advanced-power-management.html">TLP</a> . We use powertop to estimate power usage when unplugged and TLP to run as a service </p>
-<!-- /wp:paragraph -->
+First install [powertop](https://01.org/powertop) and [TLP](https://linrunner.de/en/tlp/docs/tlp-linux-advanced-power-management.html) . We use powertop to estimate power usage when unplugged and TLP to run as a service
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>sudo apt install powertop tlp</code></pre>
-<!-- /wp:code -->
+```
+sudo apt install powertop tlp
+```
 
-<!-- wp:paragraph -->
-<p>I then did a little tweaking in my <a href="https://www.linuxbabe.com/linux-server/how-to-enable-etcrc-local-with-systemd">/etc/rc.local</a></p>
-<!-- /wp:paragraph -->
+I then did a little tweaking in my [/etc/rc.local](https://www.linuxbabe.com/linux-server/how-to-enable-etcrc-local-with-systemd)
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>#!/bin/sh -e
+```
+#!/bin/sh -e
 
 # Temp disable bluetooth
 modprobe -r btusb
@@ -35,17 +31,13 @@ echo 'auto' > '/sys/bus/usb/devices/3-8/power/control'
 # VM writeback timeout
 echo '1500' > '/proc/sys/vm/dirty_writeback_centisecs';
 
-exit 0</code></pre>
-<!-- /wp:code -->
+exit 0
+```
 
-<!-- wp:paragraph -->
-<p>Lastly switch from NVidia GTX 1650 to the Intel Iris Pro</p>
-<!-- /wp:paragraph -->
+Lastly switch from NVidia GTX 1650 to the Intel Iris Pro
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>sudo prime-select intel</code></pre>
-<!-- /wp:code -->
+```
+sudo prime-select intel
+```
 
-<!-- wp:paragraph -->
-<p>After this my power usage dropped to as low as 1.6 W when Razor Turns off  or 3.6W while typing this</p>
-<!-- /wp:paragraph -->
+After this my power usage dropped to as low as 1.6 W when Razor Turns off or 3.6W while typing this

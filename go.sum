@@ -1,8 +1,14 @@
 filippo.io/edwards25519 v1.1.0 h1:FNf4tywRC1HmFuKW5xopWpigGjJKiJSV0Cqo0cJWDaA=
 filippo.io/edwards25519 v1.1.0/go.mod h1:BxyFTGdWcka3PhytdK4V28tE5sGfRvvvRV7EaN4VDT4=
+github.com/JohannesKaufmann/dom v0.2.0 h1:1bragmEb19K8lHAqgFgqCpiPCFEZMTXzOIEjuxkUfLQ=
+github.com/JohannesKaufmann/dom v0.2.0/go.mod h1:57iSUl5RKric4bUkgos4zu6Xt5LMHUnw3TF1l5CbGZo=
+github.com/JohannesKaufmann/html-to-markdown/v2 v2.4.0 h1:C0/TerKdQX9Y9pbYi1EsLr5LDNANsqunyI/btpyfCg8=
+github.com/JohannesKaufmann/html-to-markdown/v2 v2.4.0/go.mod h1:OLaKh+giepO8j7teevrNwiy/fwf8LXgoc9g7rwaE1jk=
 github.com/go-sql-driver/mysql v1.9.3 h1:U/N249h2WzJ3Ukj8SowVFjdtZKfu9vlLZxjPXV1aweo=
 github.com/go-sql-driver/mysql v1.9.3/go.mod h1:qn46aNg1333BRMNU69Lq93t8du/dwxI64Gl8i5p1WMU=
 github.com/hugo-sid/hugo-blog-awesome v1.21.0 h1:cxoeQgJePACmvPKqodDCLyme3iVAeGHm/l+iqyntGL4=
 github.com/hugo-sid/hugo-blog-awesome v1.21.0/go.mod h1:3XVERF66wgQpTsruOajS5Swr+uvyTzov1acafNaqm1E=
+golang.org/x/net v0.43.0 h1:lat02VYK2j4aLzMzecihNvTlJNQUq316m2Mr9rnM6YE=
+golang.org/x/net v0.43.0/go.mod h1:vhO1fvI4dGsIjh73sWfUVjj3N7CA9WkKJNQm2svM6Jg=
 launchpad.net/gorun v0.0.0-20120610223119-000000000019 h1:LWT6LDXJUG8OzPnAUGnShqZ7C8OjvOMKoLRWnhbpd78=
 launchpad.net/gorun v0.0.0-20120610223119-000000000019/go.mod h1:Sez9JjXBK99ccAjI9HL99fRyfn3HwVm3XLrQA+WrN3U=
