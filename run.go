@@ -18,20 +18,7 @@ func dev() error {
 
 func build() error {
     clean()
-	err := runCmd("hugo")
-	if err != nil {
-		return err
-	}
-
-	// Debug: show what was built
-	fmt.Println("\n--- Debug: Contents of public directory ---")
-	runCmd("ls", "-la", "public/")
-	fmt.Println("\n--- Debug: Looking for index files ---")
-	runCmd("ls", "-la", "public/index.*")
-	fmt.Println("\n--- Debug: First 20 files in public ---")
-	runCmd("find", "public", "-type", "f", "-print")
-
-	return nil
+	return runCmd("hugo")
 }
 
 func runCmd(args ...string) error {

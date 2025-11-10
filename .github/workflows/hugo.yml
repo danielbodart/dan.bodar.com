@@ -40,17 +40,6 @@ jobs:
       - name: Build with Hugo
         run: ./run build
 
-      - name: Debug - Show public directory contents
-        run: |
-          echo "--- Debug: Contents of public directory ---"
-          ls -la public/
-          echo ""
-          echo "--- Debug: Looking for index files ---"
-          ls -la public/index.* || echo "No index files found"
-          echo ""
-          echo "--- Debug: First 20 files in public ---"
-          find public -type f -print | head -20
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
