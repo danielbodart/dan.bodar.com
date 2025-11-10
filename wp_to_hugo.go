@@ -106,6 +106,9 @@ func processContent(content string) string {
 	wpCommentRe := regexp.MustCompile(`<!-- /?wp:[^>]+ -->`)
 	content = wpCommentRe.ReplaceAllString(content, "")
 
+	// WordPress sometimes already has <br> or <br /> tags - normalize them to newlines first
+	content = regexp.MustCompile(`<br\s*/?>`).ReplaceAllString(content, "\n")
+
 	// Convert line breaks to <br> so the HTML-to-Markdown converter preserves them
 	content = strings.ReplaceAll(content, "\n", "<br>")
 
