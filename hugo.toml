@@ -11,7 +11,7 @@ pluralizelisttitles = false   # removes the automatically appended "s" on sideba
 
 [params]
   brand = "Yesterday I was wrong"
-  # brand_image = "/images/test.jpg"
+  brand_image = "/profile.jpeg"
   description = "Daniel Worthington-Bodart's technical blog"
   dark_mode = true
   # favicon = "favicon.png"
