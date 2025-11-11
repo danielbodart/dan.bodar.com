@@ -1,17 +1,40 @@
-baseURL = 'https://dan.bodar.com/'
+baseURL = '/'
 languageCode = 'en-gb'
 defaultContentLanguage = "en"
 title = 'Yesterday I was wrong'
 enableEmoji = true
 theme = "poison"
+pluralizelisttitles = false   # removes the automatically appended "s" on sidebar entries
 
 [permalinks]
   posts = '/:year/:month/:day/:slug/'
 
 [params]
   brand = "Yesterday I was wrong"
+  # brand_image = "/images/test.jpg"
   description = "Daniel Worthington-Bodart's technical blog"
+  dark_mode = true
+  # favicon = "favicon.png"
+
   menu = [
     {Name = "About", URL = "/about/", HasChildren = false},
     {Name = "Posts", URL = "/posts/", Pre = "Recent", HasChildren = true, Limit = 5},
   ]
+
+  email_url = "mailto:dan@bodar.com"
+  github_url = "https://github.com/danielbodart/"
+  linkedin_url = "https://www.linkedin.com/in/danielbodart/"
+  twitter_url = "https://x.com/danielbodart/"
+  # youtube_url = "https://youtube.com"
+  rss_icon = true
+  rss_section = "posts"
+  # NOTE: The following three params are optional and are used to create meta tags + enhance SEO.
+  # og_image = ""                       # path to social icon - front matter: image takes precedent, then og_image, then brand_url
+                                            # this is also used in the schema output as well. Image is resized to max 1200x630
+                                            # For this to work though og_image and brand_url must be a path inside the assets directory
+                                            # e.g. /assets/images/site/og-image.png becomes images/site/og-image.png
+  # publisher_icon = ""                 # path to publisher icon - defaults to favicon, used in schema
+
+  [taxonomies]
+    series = 'series'
+    tags = 'tags'

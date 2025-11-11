@@ -11,13 +11,13 @@ func clean() error {
 	return runCmd("rm", "-rf", "public")
 }
 
-func dev() error {
-    clean()
+func start() error {
+	clean()
 	return runCmd("hugo", "server")
 }
 
 func build() error {
-    clean()
+	clean()
 	return runCmd("hugo")
 }
 
@@ -37,14 +37,14 @@ func main() {
 
 	commands := map[string]func() error{
 		"clean":   clean,
-		"dev":     dev,
+		"start":   start,
 		"build":   build,
 	}
 
 	fn, exists := commands[command]
 	if !exists {
 		fmt.Fprintf(os.Stderr, "Unknown command: %s\n", command)
-		fmt.Fprintf(os.Stderr, "Available commands: clean, dev, build (default) \n")
+		fmt.Fprintf(os.Stderr, "Available commands: clean, start, build (default) \n")
 		os.Exit(1)
 	}
 
