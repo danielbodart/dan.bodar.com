@@ -10,4 +10,4 @@ Wow Dyson have done it again: http://www.dyson.co.uk/technology/airmultiplier.as
 
 Interestingly they talk about the fact they had to do "Hundreds of iterative tests" to get the design right:
 
-http://www.dyson.co.uk/insidedyson/default.asp#Air\_Mult\_Tech\_Dev
+http://www.dyson.co.uk/insidedyson/default.asp#Air_Mult_Tech_Dev

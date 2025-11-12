@@ -169,6 +169,13 @@ func processContent(content string, postSlug string, postType string) string {
 	linkFixRe := regexp.MustCompile(`\[(https?://[^\]]+)\]\([^)]*\)`)
 	markdown = linkFixRe.ReplaceAllString(markdown, "$1")
 
+	// Unescape underscores in URLs (markdown converter escapes them but they should be literal in URLs)
+	// Match URLs and unescape underscores within them
+	urlRe := regexp.MustCompile(`https?://[^\s\)]+`)
+	markdown = urlRe.ReplaceAllStringFunc(markdown, func(url string) string {
+		return strings.ReplaceAll(url, `\_`, `_`)
+	})
+
 	// Remove lines that only contain whitespace or non-breaking spaces (U+00A0)
 	markdown = regexp.MustCompile(`(?m)^[\s\x{00A0}]+$`).ReplaceAllString(markdown, "")
 

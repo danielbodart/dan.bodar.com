@@ -10,7 +10,7 @@ I've been doing some NFT research for myself, but though I would share in case o
 
 30 second intro to NFTs: https://niftygateway.com/whatisanifty
 
-In depth description of an NFT (and lots more information): https://blog.opensea.io/guides/non-fungible-tokens/#What\_is\_a\_non-fungible\_token
+In depth description of an NFT (and lots more information): https://blog.opensea.io/guides/non-fungible-tokens/#What_is_a_non-fungible_token
 
 So the next thing to understand is that in the world of cryptocurrencies there are many different ones. Bitcoin is probably the one you have heard about but there are literally thousands:  
 https://coinmarketcap.com/

@@ -45,7 +45,7 @@ We have NO session state, all state changes to documents are persisted which lea
 Think super fast builds, no deployment (in fact no need for a web server), pure Java acceptance tests (i.e. refactorable) and the 80/20 rule on what is good enough to give you confidence that the system works.
 
 **Progressive Enhancement and Accessibility**  
-http://en.wikipedia.org/wiki/Progressive\_Enhancement
+http://en.wikipedia.org/wiki/Progressive_Enhancement
 
 All stories are played vanilla html version first and a second story for JavaScript enhancements. This leads to cleaner simpler semantic html and also allows feedback from the first story to be tacked onto the second story.
 
