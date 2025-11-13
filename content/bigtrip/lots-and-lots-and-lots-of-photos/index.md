@@ -9,7 +9,7 @@ comments:
   - {"author":"chelsea","email":"chelsea@bodar.com","url":"","date":"2006-08-22T13:36:52Z","content":"Hugely fabulous and interesting!\r\nAnother world, of course...\r\nTo look at again and again and again\r\nMainly to remind us how different and how estranged we have become from other cultures (we were once not so long ago, like them! simple, undemanding and generous hearted)\r\nlet's not complain any more in life .","parent":0}
 ---
 
-I've upload all of my photos (nearly 700!!!!) so if you're bored head over [here](http://www.bodar.com/bigtrip/gallery/) .  
+I've upload all of my photos (nearly 700!!!!) so if you're bored head over [here](/bigtrip/gallery/) .  
 And here is a taster...
 
 ![](P1000406.JPG)

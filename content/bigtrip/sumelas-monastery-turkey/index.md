@@ -8,4 +8,4 @@ comments:
   - {"author":"chelsea","email":"chelsea@bodar.com","url":"","date":"2006-07-21T14:57:06Z","content":"Ooooohhhh!!! just incredible! How did they do it? I mean, it's so vertical...","parent":0}
 ---
 
-![](bigtrip/pictures/P1000618.JPG)
+![](P1000618.JPG)

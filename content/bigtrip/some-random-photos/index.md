@@ -34,4 +34,4 @@ With Metin Koca of [Ensemble Travel](http://www.ensembletour.com/). Metin was an
 
 Breaking the record, 330 miles on a 23 litres of 93 octane fuel - Kyrgystan (Averaging 40 mph on gravel and 50 mpg on tarmac)
 
-PS: I've republished the [photos](http://bodar.com/bigtrip/gallery) so it's easier to browse the whole lot in one go
+PS: I've republished the [photos](/bigtrip/gallery) so it's easier to browse the whole lot in one go

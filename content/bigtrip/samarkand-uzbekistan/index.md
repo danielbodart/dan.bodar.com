@@ -18,7 +18,7 @@ Outside the Guri Amir Mausoleum
 
 Inside
 
-![](483.jpg)Â 
+![](483.jpg) 
 
 The Registan
 
@@ -28,4 +28,3 @@ Tile work up close
 
 ![](518.jpg)
 
-Â

@@ -157,6 +157,11 @@ func processContent(content string, postSlug string, postType string) string {
 		})
 	}
 
+	// Normalize Big Trip image URLs in HTML BEFORE markdown conversion
+	// Convert <img src="/bigtrip/pictures/file.jpg" /> to <img src="http://bodar.com/bigtrip/pictures/file.jpg" />
+	// so they match our URL replacement regex later
+	content = regexp.MustCompile(`<img\s+src="/bigtrip/`).ReplaceAllString(content, `<img src="http://bodar.com/bigtrip/`)
+
 	// Convert HTML to Markdown
 	markdown, err := md.ConvertString(content)
 	if err != nil {
@@ -169,6 +174,10 @@ func processContent(content string, postSlug string, postType string) string {
 	linkFixRe := regexp.MustCompile(`\[(https?://[^\]]+)\]\([^)]*\)`)
 	markdown = linkFixRe.ReplaceAllString(markdown, "$1")
 
+	// Convert external gallery links to local paths
+	// Pattern: http://www.bodar.com/bigtrip/gallery/ -> /bigtrip/gallery/
+	markdown = regexp.MustCompile(`https?://[^/]*bodar\.com/bigtrip/gallery`).ReplaceAllString(markdown, "/bigtrip/gallery")
+
 	// Unescape underscores in URLs (markdown converter escapes them but they should be literal in URLs)
 	// Match URLs and unescape underscores within them
 	urlRe := regexp.MustCompile(`https?://[^\s\)]+`)
@@ -178,6 +187,10 @@ func processContent(content string, postSlug string, postType string) string {
 
 	// Remove lines that only contain whitespace or non-breaking spaces (U+00A0)
 	markdown = regexp.MustCompile(`(?m)^[\s\x{00A0}]+$`).ReplaceAllString(markdown, "")
+
+	// Remove the "Â" character which appears from mishandled non-breaking spaces
+	// This typically appears as standalone "Â" or "Â " in the text
+	markdown = strings.ReplaceAll(markdown, "Â", "")
 
 	// Remove excessive blank lines (more than 2 consecutive newlines)
 	markdown = regexp.MustCompile(`\n{3,}`).ReplaceAllString(markdown, "\n\n")
@@ -501,8 +514,10 @@ func exportPosts() error {
 	}
 
 	// Create section _index.md
+	// Note: Title must be "Bigtrip" (not "Big Trip") to match the theme's menu logic
+	// which compares lowercased section title with URL (bigtrip)
 	indexContent := `---
-title: "Big Trip"
+title: "Bigtrip"
 ---
 `
 	if err := os.WriteFile(filepath.Join(hugoContentDir, "_index.md"), []byte(indexContent), 0644); err != nil {
