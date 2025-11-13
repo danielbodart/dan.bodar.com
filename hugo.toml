@@ -8,6 +8,7 @@ pluralizelisttitles = false   # removes the automatically appended "s" on sideba
 
 [permalinks]
   posts = '/:year/:month/:day/:slug/'
+  bigtrip = '/bigtrip/:year/:month/:day/:slug/'
 
 [params]
   brand = "Yesterday I was wrong"
@@ -19,6 +20,7 @@ pluralizelisttitles = false   # removes the automatically appended "s" on sideba
   menu = [
     {Name = "About", URL = "/about/", HasChildren = false},
     {Name = "Posts", URL = "/posts/", Pre = "Recent", HasChildren = true, Limit = 5},
+    {Name = "Big Trip", URL = "/bigtrip/", HasChildren = false},
   ]
 
   email_url = "mailto:dan@bodar.com"
