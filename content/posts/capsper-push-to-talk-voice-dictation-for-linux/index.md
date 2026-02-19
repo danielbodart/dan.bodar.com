@@ -19,7 +19,7 @@ Does CapsLock annoy you? Ever wished it actually did something useful instead of
 
 ## The pitch
 
-~1 second latency between speaking and words appearing on screen. Runs entirely on your machine. Works on both X11 and Wayland. Single binary, no dependencies to manage, no Python runtime, no Docker container. You download it, run the installer, and CapsLock becomes useful for the first time in its miserable existence.
+~2 second latency between speaking and words appearing on screen. Runs entirely on your machine. Works on both X11 and Wayland. Single binary, no dependencies to manage, no Python runtime, no Docker container. You download it, run the installer, and CapsLock becomes useful for the first time in its miserable existence.
 
 ## Why does this exist?
 
