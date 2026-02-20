@@ -23,9 +23,9 @@ Does CapsLock annoy you? Ever wished it actually did something useful instead of
 
 ## Why does this exist?
 
-I wanted voice dictation on Linux that didn't suck. The options are either cloud-based (privacy, latency, subscriptions) or local tools that shell out to a dozen different utilities and break every time your desktop environment sneezes. I wanted something that just *worked* — hold a key, talk, release, done.
+I wanted voice dictation on Linux that didn't suck. The options are either cloud-based (privacy, latency, subscriptions) or local Python-based tools that shell out to a dozen different utilities, run slow, and break every time your desktop environment sneezes. I wanted something that just *worked* — fast, efficient, hold a key, talk, release, done.
 
-So I wrote a single [Zig](https://ziglang.org/) binary that handles the entire pipeline: keyboard grab via evdev, audio capture via PipeWire, GPU transcription via [whisper.cpp](https://github.com/ggml-org/whisper.cpp), and text injection via uinput. No xdotool. No ydotool. No keyd. No external anything.
+So I wrote a single [Zig](https://ziglang.org/) binary that handles the entire pipeline: keyboard grab via evdev, audio capture via PipeWire, GPU transcription via [whisper.cpp](https://github.com/ggml-org/whisper.cpp), and text injection via uinput. No xdotool. No ydotool. No keyd. No Python. No external anything.
 
 ## How it works
 
@@ -50,7 +50,7 @@ The result is streaming transcription that's both fast and stable. Words appear 
 
 Confirmed tokens are committed as a forced decoder prefix for the next cycle, so the model never contradicts itself. It sees its own previous output as given, builds KV cache state, then continues generating from where it left off. No re-decoding, no instability.
 
-When the 15-second sliding window trims old audio, the corresponding tokens get demoted from "forced output" to "conditioning context" rather than being deleted. The model treats them as hints instead of constraints. This two-tier approach prevents the hallucination cascades that plagued earlier attempts.
+When the 30-second sliding window trims old audio, the corresponding tokens get demoted from "forced output" to "conditioning context" rather than being deleted. The model treats them as hints instead of constraints. This two-tier approach prevents the hallucination cascades that plagued earlier attempts.
 
 ### Other things going on under the hood
 
@@ -70,7 +70,7 @@ On an RTX 5070 Ti with the large-v3-turbo model (q5_0 quantized):
 
 ## Why Zig?
 
-I wanted deterministic memory management (no GC pauses during transcription), direct C FFI without overhead (whisper.cpp and PipeWire are both C libraries), and a single statically-linked binary with no runtime dependencies. Zig gives you all of that plus comptime, which turns out to be incredibly useful when you're building mel spectrograms and attention analysis pipelines.
+I wanted deterministic memory management (no GC pauses during transcription), direct C FFI without overhead (whisper.cpp exposes a C API and PipeWire is a C library), and a single binary with minimal runtime dependencies. Zig gives you all of that plus comptime, which turns out to be incredibly useful when you're building mel spectrograms and attention analysis pipelines.
 
 Also it compiles fast. The whole binary builds in about 2 seconds. After years of fighting build times in other languages, this still makes me unreasonably happy.
 
@@ -82,7 +82,7 @@ curl -fSL https://github.com/danielbodart/capsper/releases/latest/download/capsp
 ./install.sh
 ```
 
-You need Linux, an NVIDIA GPU (GTX 1650 or newer), and PipeWire. The installer handles everything else — model downloads (~574 MB), permissions, systemd service, microphone detection.
+You need Linux, an NVIDIA GPU (GTX 1650 or newer), and PipeWire. The installer handles everything else — CUDA libraries (~600 MB), model downloads (~574 MB), permissions, systemd service, microphone detection. Budget about 1.2 GB of disk space total.
 
 Then just:
 
