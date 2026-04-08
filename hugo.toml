@@ -27,6 +27,7 @@ pluralizelisttitles = false   # removes the automatically appended "s" on sideba
   email_url = "mailto:dan@bodar.com"
   github_url = "https://github.com/danielbodart/"
   linkedin_url = "https://www.linkedin.com/in/danielbodart/"
+  cv_url = "https://danielbodart.github.io/cv/"
   twitter_url = "https://x.com/danielbodart/"
   # youtube_url = "https://youtube.com"
   rss_icon = true

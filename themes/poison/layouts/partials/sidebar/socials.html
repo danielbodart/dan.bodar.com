@@ -20,6 +20,13 @@
         </svg>
     </a>
 {{ end }}
+{{ if .Site.Params.cv_url }}
+    <a target="_blank" class="social" title="CV" href="{{ .Site.Params.cv_url }}">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-1 7V3.5L18.5 9H13zM6 20V4h5v7h7v9H6z"/>
+        </svg>
+    </a>
+{{ end }}
 {{ if .Site.Params.twitter_url }}
     <a target="_blank" class="social" title="Twitter" href="{{ .Site.Params.twitter_url }}">
         <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 16 16">
