@@ -33,6 +33,8 @@ I think of the harness as having two concerns:
 - **Feedforward (guides):** specs, types, constraints, standards. Things that tell the agent what "correct" looks like *before* it writes the code.
 - **Feedback (sensors and guardrails):** tests, metrics, logs, validation systems, limits, failure detection. Most of this feeds straight back to the agent so it can self-correct. Some of it — the guardrail end of the spectrum — escalates straight to humans instead, stop-the-line style, when something is too risky for the agent to keep iterating on.
 
+The terms *guides* and *sensors* (and the feedforward/feedback framing) I borrow from Birgitta Böckeler's excellent [Harness Engineering](https://martinfowler.com/articles/harness-engineering.html) on martinfowler.com — credit where it's due, and worth reading in its own right.
+
 {{< mermaid >}}
 flowchart LR
     G[Feedforward<br/>specs, types,<br/>constraints, standards] --> A[Agent execution]
