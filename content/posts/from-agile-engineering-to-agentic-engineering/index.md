@@ -100,7 +100,7 @@ A useful way to think about responsibilities:
 - trade-offs and prioritisation
 - architecture and constraints
 - acceptance criteria and specifications
-- defining guardrails, guides, and sensors
+- defining guides and sensors (including the guardrail end of the spectrum)
 - reviewing based on risk (not exhaustively)
 - improving the system, not patching outputs
 - sensing when agents are struggling
@@ -125,8 +125,7 @@ Here's the line that crystallised it for me:
 That factory has three core concepts:
 
 - **Feedforward (guides):** specs, types, constraints, standards
-- **Feedback (sensors):** tests, metrics, logs, validation systems
-- **Guardrails:** escalation points, limits, failure detection
+- **Feedback (sensors and guardrails):** tests, metrics, logs, validation systems, limits, failure detection — most of it loops back to the agent, with the guardrail end of the spectrum escalating to humans instead
 
 And one rule:
 
