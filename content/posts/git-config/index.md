@@ -12,14 +12,20 @@ My .gitconfig contains
 ```
 [user]
         email = dan@bodar.com
-        name = Daniel Worthington-Bodart
+        name = Daniel Bodart
 [color]
         ui = true
 [alias]
         ci = commit
         co = checkout
         st = status -sb
-        nuke = !git checkout -f && git clean -f -d
+        nuke = !git checkout -f && git clean -xf -d
 [push]
         default = current
+[filter "lfs"]
+        clean = git-lfs clean -- %f
+        smudge = git-lfs smudge -- %f
+        process = git-lfs filter-process
+        required = true
+
 ```
