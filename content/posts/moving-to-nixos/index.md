@@ -1,7 +1,6 @@
 ---
 title: "Moving to NixOS"
 date: 2026-09-18T09:00:00Z
-draft: true
 slug: "moving-to-nixos"
 categories:
   - linux
