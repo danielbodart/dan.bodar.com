@@ -92,6 +92,6 @@ Or use a single `CNAME` record for the apex domain if your DNS provider supports
 ## Dependencies
 
 Managed automatically via mise:
-- Go (specified in `.tool-versions`)
-- Hugo (specified in `.tool-versions`)
+- Go (specified in `mise.toml`)
+- Hugo (specified in `mise.toml`)
 - MySQL client library: `github.com/go-sql-driver/mysql` (via `go.mod`)
